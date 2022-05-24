@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	printf("OI");
+	printf("OI TRICOSO");
 	return 0;
 }
