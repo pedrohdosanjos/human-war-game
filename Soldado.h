@@ -1,13 +1,9 @@
 #pragma once
+#include "Inimigo.h"
 
-class Soldado
+class Soldado: public Inimigo
 {
-private:
-	int vida;
-
 public:
 	Soldado();
 	~Soldado();
-	int setvida(int v) { vida = v; }
-	void getvida() { return vida; }
 };
