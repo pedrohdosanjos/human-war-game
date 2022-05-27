@@ -19,7 +19,7 @@ int main()
         Militar Britanico;
 
     else
-        std::cout << "INVÁLIDO";
+        std::cout << "INVÃLIDO";
 
     return 0;
 }
