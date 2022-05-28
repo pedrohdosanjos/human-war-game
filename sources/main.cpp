@@ -1,8 +1,6 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
-#include <Windows.h>
-#include "Soldado.h"
-#include "Militar.h"
+#include "FaseMedia.h"
+#include "FaseContemp.h"
 
 int main()
 {
@@ -13,10 +11,10 @@ int main()
     std::cout << std::endl;
 
     if (fase == 1)
-        Soldado Romano;
+        FaseMedia fase1;
 
     else if (fase == 2)
-        Militar Britanico;
+        FaseContemp fase2;
 
     else
         std::cout << "INVÁLIDO";
