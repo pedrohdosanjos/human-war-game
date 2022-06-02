@@ -1,31 +1,214 @@
 #include "Personagem.h"
 
-Personagem::Personagem():Entidade()
+void Personagem::initPhysics()
 {
-	velocidade = 0;
-	num_vidas = 0;
+	this->velocityMax = 20.f;
+	this->velocityMin = 1.f;
+	this->acceleration = 3.3f;
+	this->drag = 0.87f;
+	this->gravity = 4.f;
+	this->velocityMaxY = 80.f;
+}
+
+void Personagem::initVariables()
+{
+	this->animState = IDLE;
+
+}
+
+void Personagem::initTexture()
+{
+}
+
+void Personagem::initSprite()
+{
+	this->sprite.setTexture(this->textureSheet);
+	this->currentFrame = sf::IntRect(0, 0, 40, 50); //40 por 50 
+
+	this->sprite.setTextureRect(this->currentFrame);
+	this->sprite.setScale(3.f, 3.f);
+}
+
+void Personagem::initAnimations()
+{
+	this->animationTimer.restart();
+	this->animationSwitch = true; //default
+}
+
+Personagem::Personagem()
+{
+	this->initVariables();
+	this->initTexture();
+	this->initSprite();
+	this->initAnimations();
+	this->initPhysics();
+
 }
 
 Personagem::~Personagem()
 {
 }
 
-void Personagem::setVelocidade(int vel)
+const bool& Personagem::getAnimSwitch()
 {
-	velocidade = vel;
+	bool anim_switch = this->animationSwitch;
+
+	if (this->animationSwitch)
+		this->animationSwitch = false;
+
+	return anim_switch;
 }
 
-int Personagem::getVelocidade()
+const sf::FloatRect Personagem::getGlobalBounds() const
 {
-	return velocidade;
+	return this->sprite.getGlobalBounds();
 }
 
-void Personagem::setNum_vidas(int vidas)
+const sf::Vector2f Personagem::getPosition() const
 {
-	num_vidas = vidas;
+	return this->sprite.getPosition();
 }
 
-int Personagem::getNum_vidas()
+void Personagem::setPosition(const float x, const float y)
 {
-	return num_vidas;
+	this->sprite.setPosition(x, y);
+}
+
+void Personagem::resetVelocityY()
+{
+	this->velocity.y = 0.f;
+}
+
+sf::Vector2f Personagem::updateMovement(sf::Vector2f pos)
+{
+}
+
+void Personagem::updateAnimations()
+{
+	if (this->animState == IDLE)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f || this->getAnimSwitch())
+		{
+			this->currentFrame.top = 0.f;
+			this->currentFrame.left += 40.f;
+
+			if (this->currentFrame.left >= 160.f) //valor usado para o png em questão
+			{
+				this->currentFrame.left = 0; //Reiniciando a animação
+			}
+
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
+		}
+	}
+	else if (this->animState == MOVING_RIGHT)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f)
+		{
+			this->currentFrame.top = 50.f;
+			this->currentFrame.left += 40.f;
+
+			if (this->currentFrame.left >= 360.f) //valor usado para o png em questão
+			{
+				this->currentFrame.left = 0; //Reiniciando a animação
+			}
+
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
+		}
+
+		this->sprite.setScale(3.f, 3.f);
+		this->sprite.setOrigin(0.f, 0.f);
+	}
+	else if (this->animState == MOVING_LEFT)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f)
+		{
+			this->currentFrame.top = 50.f;
+			this->currentFrame.left += 40.f;
+
+			if (this->currentFrame.left >= 360.f) //valor usado para o png em questão
+			{
+				this->currentFrame.left = 0; //Reiniciando a animação
+			}
+
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
+		}
+
+		this->sprite.setScale(-3.f, 3.f);
+		this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 3.f, 0.f);
+	}
+
+	else
+	{
+		this->animationTimer.restart();
+	}
+
+
+
+}
+
+void Personagem::update()
+{
+	//this->updateMovement(0);
+	this->updateAnimations();
+	this->updatePhysics();
+}
+
+void Personagem::render(sf::RenderTarget& target)
+{
+	target.draw(this->sprite);
+}
+
+void Personagem::resetAnimationTimer()
+{
+	this->animationTimer.restart();
+	this->animationSwitch = true;
+}
+
+void Personagem::move(const float x, const float y)
+{
+	//Acceleration
+	this->velocity.x += x * this->acceleration;
+
+
+
+	//Limit velocity
+	if (std::abs(this->velocity.x) > this->velocityMax)
+	{
+		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
+	}
+
+	//Jumping 
+	this->velocity.y = -sqrtf(y * 980.f * JUMPING_HEIGHT);
+}
+
+
+void Personagem::updatePhysics()
+{
+
+	//Gravity
+	this->velocity.y += 1.0 * this->gravity;
+
+	//Limit gravity
+	if (std::abs(this->velocity.y) > this->velocityMaxY)
+	{
+		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
+	}
+
+
+	//Deceleration
+	this->velocity *= this->drag;
+
+	//Limit deceleration
+	if (std::abs(this->velocity.x) < this->velocityMin)
+	{
+		this->velocity.x = 0.f;
+	}
+	if (std::abs(this->velocity.y) < this->velocityMin)
+	{
+		this->velocity.y = 0.f;
+	}
+	this->sprite.move(this->velocity);
 }
