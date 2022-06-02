@@ -4,7 +4,7 @@
 
 class FaseMedia
 {
-private:
+public:
 	Soldado Romano;
 	Fogo Fogo;
 

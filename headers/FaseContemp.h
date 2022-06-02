@@ -4,7 +4,7 @@
 
 class FaseContemp
 {
-private:
+public:
 	Militar Britanico;
 	Arame Farpado;
 

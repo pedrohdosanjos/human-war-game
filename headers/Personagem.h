@@ -1,20 +1,61 @@
 #pragma once
-#include "Entidade.h"
+#include "Jogo.h"
 
-class Personagem: public Entidade
+#define JUMPING_HEIGHT 200.f
+
+enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
+
+class Personagem
 {
 protected:
-	int velocidade;
-	int num_vidas;
+	sf::Sprite sprite;
+	sf::Texture textureSheet;
+	sf::Clock animationTimer;
+
+	//Animation
+	short animState;
+	sf::IntRect currentFrame;
+	bool animationSwitch;
+
+
+	//Physics
+	sf::Vector2f velocity;
+	float velocityMax;
+	float velocityMin;
+	float acceleration;
+	float drag;
+	float gravity;
+	float velocityMaxY;
+
+	//Core
+	void initPhysics();
+	void initVariables();
+	virtual void initTexture();
+	void initSprite();
+	void initAnimations();
 
 public:
+	//Constructor / Destructor
 	Personagem();
 	~Personagem();
 
-	void setVelocidade(int vel);
-	int getVelocidade();
+	//Accessors
+	const bool& getAnimSwitch();
+	const sf::FloatRect getGlobalBounds() const;
+	const sf::Vector2f getPosition() const;
+	bool canJump;
 
-	void setNum_vidas(int vidas);
-	int getNum_vidas();
+	//Modifiers
+	void setPosition(const float x, const float y);
+	void resetVelocityY();
+
+	//Functions
+	void resetAnimationTimer();
+	void move(const float x, const float y);
+	void updatePhysics();
+	virtual sf::Vector2f updateMovement(sf::Vector2f pos) = 0;
+	void updateAnimations();
+	void update();
+	void render(sf::RenderTarget& target);
+
 };
-
