@@ -1,7 +1,6 @@
 #pragma once
-#include "Obstaculo.h"
 
-class Arame :public Obstaculo
+class Arame
 {
 public:
 	Arame();

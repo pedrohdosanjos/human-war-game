@@ -1,17 +1,15 @@
 #pragma once
-#include "Personagem.h"
 
-class Inimigo: public Personagem
+class Inimigo
 {
+protected:
+	int vida;
+
 public:
-
-	sf::Vector2f updateMovement(sf::Vector2f pos);
-	virtual void initTexture() = 0;
-	void initPhysics();
-
-	//Constructor / Destructor
 	Inimigo();
 	~Inimigo();
 
+	void setVida(int v);
 
+	int getVida();
 };
