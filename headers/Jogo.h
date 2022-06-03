@@ -9,14 +9,14 @@
 #include <iostream>
 #include<ctime>
 class Player;
-class Inimigo;
+class Soldado;
 
 class Jogo
 {
 private:
 	//Variables
 	Player* player;
-	Inimigo* enemy;
+	Soldado* soldier;
 
 
 	//Window
@@ -42,10 +42,10 @@ public:
 
 	//Functions
 	void pollEvents();
-	void updatePlayer();
-	void renderPlayer();
-	void updateEnemy();
+	void updateCharacs();
+	void renderPlayer();	
 	void renderEnemy();
+
 	void update();
 	void render();
 
