@@ -1,24 +1,45 @@
 #include "Inimigo.h"
-#include "SFML/Graphics.hpp"
-#include <Windows.h>
-#include <iostream>
 
-Inimigo::Inimigo()
+sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 {
-    vida = 100;
+	this->animState = IDLE;
+
+	if (this->getPosition().x > pos.x)
+	{
+		this->move(-1.f, 0.f);
+		this->animState = MOVING_LEFT;
+	}
+
+	else if (this->getPosition().x < pos.x)
+	{
+		this->move(1.f, 0.f);
+		this->animState = MOVING_RIGHT;
+	}
+
+	return pos;
+}
+
+void Inimigo::initTexture()
+{
+}
+
+void Inimigo::initPhysics()
+{
+	this->velocityMax = 10.f;
+	this->velocityMin = 1.f;
+	this->acceleration = 3.f;
+	this->drag = 0.8f;
+	this->gravity = 4.f;
+	this->velocityMaxY = 80.f;
+}
+
+
+
+Inimigo::Inimigo() : Personagem()
+{
+	this->initPhysics();
 }
 
 Inimigo::~Inimigo()
 {
-    vida = 0;
-}
-
-void Inimigo::setVida(int v)
-{
-    vida = v;
-}
-
-int Inimigo::getVida()
-{
-    return vida;
 }

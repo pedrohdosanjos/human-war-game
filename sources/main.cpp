@@ -1,23 +1,19 @@
 #include <iostream>
-#include "FaseMedia.h"
-#include "FaseContemp.h"
+#include "Jogo.h"
 
 int main()
 {
-    int fase = 0;
+    Jogo jogo;
+    //Game loop
+    while (jogo.running())
+    {
+        //Update
+        jogo.update();
 
-    std::cout << "Selecione a fase desejada(1 ou 2): ";
-    std::cin >> fase;
-    std::cout << std::endl;
+        //Render
+        jogo.render();
+    }
 
-    if (fase == 1)
-        FaseMedia fase1;
-
-    else if (fase == 2)
-        FaseContemp fase2;
-
-    else
-        std::cout << "INVÁLIDO";
 
     return 0;
 }

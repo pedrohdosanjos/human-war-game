@@ -69,10 +69,10 @@ void Game::pollEvents()
 				this->ev.key.code == sf::Keyboard::S
 				)
 			{
-
+			
 				this->player->resetAnimationTimer();
 			}
-
+				
 
 		}
 
@@ -91,6 +91,7 @@ void Game::renderPlayer()
 	this->player->render(*this->window);
 }
 
+
 void Game::update()
 {
 	this->pollEvents();
@@ -106,6 +107,9 @@ void Game::render()
 
 	//Draw game objects
 	this->renderPlayer();
+	
+
+	//Display
 	this->window->display();
 }
 
@@ -115,9 +119,10 @@ void Game::updateCollision()
 	if (this->player->getPosition().y + this->player->getGlobalBounds().height > this->window->getSize().y)
 	{
 		this->player->resetVelocityY();
+		this->player->setCanJump(true); //Pode pular
 
 		this->player->setPosition(
 			this->player->getPosition().x,
-			this->window->getSize().y - this->player->getGlobalBounds().height);
+			this->window->getSize().y - this->player->getGlobalBounds().height);	
 	}
 }

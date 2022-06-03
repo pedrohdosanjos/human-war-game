@@ -1,6 +1,6 @@
 #include "Obstaculo.h"
 
-Obstaculo::Obstaculo():Entidade()
+Obstaculo::Obstaculo() :Entidade()
 {
 	freq = 0;
 }
