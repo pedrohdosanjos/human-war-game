@@ -1,7 +1,6 @@
 #pragma once
-#include"Obstaculo.h"
 
-class Fogo: public Obstaculo
+class Fogo
 {
 public:
 	Fogo();
