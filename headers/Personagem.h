@@ -28,9 +28,9 @@ protected:
 	float velocityMaxY;
 
 	//Core
-	void initPhysics();
+	virtual void initPhysics() = 0;
+	virtual void initTexture() = 0;
 	void initVariables();
-	virtual void initTexture();
 	void initSprite();
 	void initAnimations();
 
@@ -50,12 +50,13 @@ public:
 	void resetVelocityY();
 
 	//Functions
-	void resetAnimationTimer();
-	void move(const float x, const float y);
-	void updatePhysics();
 	virtual sf::Vector2f updateMovement(sf::Vector2f pos) = 0;
-	void updateAnimations();
-	void update();
+	void move(const float x, const float y);
 	void render(sf::RenderTarget& target);
+	void resetAnimationTimer();
+	void updateAnimations();
+	void updatePhysics();
+	void update();
+	
 
 };

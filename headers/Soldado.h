@@ -6,4 +6,6 @@ class Soldado: public Inimigo
 public:
 	Soldado();
 	~Soldado();
+
+	void initTexture();
 };
