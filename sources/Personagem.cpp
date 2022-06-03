@@ -1,10 +1,12 @@
 #include "Personagem.h"
 
+
 void Personagem::initVariables()
 {
 	this->animState = IDLE;
 
 }
+
 
 void Personagem::initSprite()
 {
@@ -15,11 +17,13 @@ void Personagem::initSprite()
 	this->sprite.setScale(3.f, 3.f);
 }
 
+
 void Personagem::initAnimations()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true; //default
 }
+
 
 Personagem::Personagem()
 {
@@ -32,15 +36,6 @@ Personagem::~Personagem()
 {
 }
 
-const bool& Personagem::getAnimSwitch()
-{
-	bool anim_switch = this->animationSwitch;
-
-	if (this->animationSwitch)
-		this->animationSwitch = false;
-
-	return anim_switch;
-}
 
 const sf::FloatRect Personagem::getGlobalBounds() const
 {
@@ -52,6 +47,17 @@ const sf::Vector2f Personagem::getPosition() const
 	return this->sprite.getPosition();
 }
 
+const bool& Personagem::getAnimSwitch()
+{
+	bool anim_switch = this->animationSwitch;
+
+	if (this->animationSwitch)
+		this->animationSwitch = false;
+
+	return anim_switch;
+}
+
+
 void Personagem::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
@@ -61,6 +67,25 @@ void Personagem::resetVelocityY()
 {
 	this->velocity.y = 0.f;
 }
+
+
+void Personagem::move(const float x, const float y)
+{
+	//Acceleration
+	this->velocity.x += x * this->acceleration;
+
+
+
+	//Limit velocity
+	if (std::abs(this->velocity.x) > this->velocityMax)
+	{
+		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
+	}
+
+	//Jumping 
+	this->velocity.y = -sqrt(y * 980.f * JUMPING_HEIGHT);
+}
+
 
 void Personagem::updateAnimations()
 {
@@ -128,39 +153,11 @@ void Personagem::updateAnimations()
 
 }
 
-void Personagem::update()
-{
-	//this->updateMovement(0);
-	this->updateAnimations();
-	this->updatePhysics();
-}
-
-void Personagem::render(sf::RenderTarget& target)
-{
-	target.draw(this->sprite);
-}
 
 void Personagem::resetAnimationTimer()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true;
-}
-
-void Personagem::move(const float x, const float y)
-{
-	//Acceleration
-	this->velocity.x += x * this->acceleration;
-
-
-
-	//Limit velocity
-	if (std::abs(this->velocity.x) > this->velocityMax)
-	{
-		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
-	}
-
-	//Jumping 
-	this->velocity.y = -sqrt(y * 980.f * JUMPING_HEIGHT);
 }
 
 void Personagem::updatePhysics()
@@ -189,4 +186,16 @@ void Personagem::updatePhysics()
 		this->velocity.y = 0.f;
 	}
 	this->sprite.move(this->velocity);
+}
+
+void Personagem::update()
+{
+	this->updateAnimations();
+	this->updatePhysics();
+}
+
+
+void Personagem::render(sf::RenderTarget& target)
+{
+	target.draw(this->sprite);
 }

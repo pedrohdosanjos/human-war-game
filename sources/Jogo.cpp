@@ -1,12 +1,20 @@
 #include "Jogo.h"
 #include "Player.h"
-#include "Inimigo.h"
+#include "Soldado.h"
 
 
 //Private function
 void Jogo::initVariables()
 {
 	this->window = nullptr;
+}
+
+void Jogo::initWindow()
+{
+	this->videoMode.height = 720;
+	this->videoMode.width = 1280;
+	this->window = new sf::RenderWindow(this->videoMode, "Jogo", sf::Style::Titlebar | sf::Style::Close);
+	this->window->setFramerateLimit(60);
 }
 
 void Jogo::initPlayer()
@@ -16,16 +24,8 @@ void Jogo::initPlayer()
 
 void Jogo::initEnemy()
 {
-	this->enemy = new Inimigo();
-	this->enemy->setPosition(this->window->getSize().x, this->window->getSize().y);
-}
-
-void Jogo::initWindow()
-{
-	this->videoMode.height = 720;
-	this->videoMode.width = 1280;
-	this->window = new sf::RenderWindow(this->videoMode, "Jogo", sf::Style::Titlebar | sf::Style::Close);
-	this->window->setFramerateLimit(60);
+	this->soldier = new Soldado();
+	this->soldier->setPosition(this->window->getSize().x, this->window->getSize().y);
 }
 
 
@@ -42,8 +42,9 @@ Jogo::~Jogo()
 {
 	delete this->window;
 	delete this->player;
-	delete this->enemy;
+	delete this->soldier;
 }
+
 
 //Accessors
 const bool Jogo::running() const
@@ -54,8 +55,6 @@ const bool Jogo::running() const
 
 
 //Functions
-
-
 void Jogo::pollEvents()
 {
 	while (this->window->pollEvent(this->ev))
@@ -78,22 +77,18 @@ void Jogo::pollEvents()
 				)
 			{
 				this->player->resetAnimationTimer();
-				this->enemy->resetAnimationTimer();
+				this->soldier->resetAnimationTimer();
 			}
 		}
 	}
 	this->updateCollision();
 }
 
-void Jogo::updateEnemy()
+void Jogo::updateCharacs()
 {
-	this->enemy->updateMovement(this->player->updateMovement(sf::Vector2f(0, 0)));
-	this->enemy->update();
+	this->soldier->updateMovement(this->player->updateMovement(sf::Vector2f(0, 0)));
+	this->soldier->update();
 	this->player->update();
-}
-
-void Jogo::updatePlayer()
-{
 }
 
 void Jogo::renderPlayer()
@@ -101,28 +96,9 @@ void Jogo::renderPlayer()
 	this->player->render(*this->window);
 }
 
-
 void Jogo::renderEnemy()
 {
-	this->enemy->render(*this->window);
-}
-
-void Jogo::update()
-{
-	this->pollEvents();
-	this->updatePlayer();
-	this->updateEnemy();
-}
-
-void Jogo::render()
-{
-	this->window->clear();
-
-
-	//Draw game objects
-	this->renderPlayer();
-	this->renderEnemy();
-	this->window->display();
+	this->soldier->render(*this->window);
 }
 
 void Jogo::updateCollision()
@@ -137,13 +113,31 @@ void Jogo::updateCollision()
 			this->player->getPosition().x,
 			this->window->getSize().y - this->player->getGlobalBounds().height);
 	}
-	if (this->enemy->getPosition().y + this->enemy->getGlobalBounds().height > this->window->getSize().y)
+	if (this->soldier->getPosition().y + this->soldier->getGlobalBounds().height > this->window->getSize().y)
 	{
-		this->enemy->canJump = true;
-		this->enemy->resetVelocityY();
+		this->soldier->resetVelocityY();
 
-		this->enemy->setPosition(
-			this->enemy->getPosition().x,
-			this->window->getSize().y - this->enemy->getGlobalBounds().height);
+		this->soldier->setPosition(
+			this->soldier->getPosition().x,
+			this->window->getSize().y - this->soldier->getGlobalBounds().height);
 	}
+}
+
+//funções da main
+
+void Jogo::update()
+{
+	this->pollEvents();
+	this->updateCharacs();
+}
+
+void Jogo::render()
+{
+	this->window->clear();
+
+
+	//Draw game objects
+	this->renderPlayer();
+	this->renderEnemy();
+	this->window->display();
 }
