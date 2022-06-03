@@ -8,6 +8,8 @@
 #include <vector>
 #include <iostream>
 #include<ctime>
+
+
 class Player;
 
 class Game
@@ -15,6 +17,7 @@ class Game
 private:
 	//Variables
 	Player* player;
+	
 
 
 	//Window
@@ -27,13 +30,13 @@ private:
 	void initVariables();
 	void initWindow();
 	void initPlayer();
-
+	
 
 public:
 	//Constructor / Destructor
 	Game();
 	virtual ~Game();
-
+	
 	//Accessors
 	const bool running() const;
 

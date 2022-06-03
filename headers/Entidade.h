@@ -1,19 +1,21 @@
 #pragma once
 #include "Ente.h"
 
-class Entidade: public Ente
+class Entidade : public Ente
 {
 protected:
+	//Protected variables
 	int x;
 	int y;
-
 	int dano;
 	char arquivo_png[30];
 
 public:
+	//Constructor/Destructor
 	Entidade();
 	~Entidade();
 
+	//Public Functions
 	void setX(int posx);
 	int getX();
 
@@ -26,6 +28,5 @@ public:
 	void setArquivo(const char* arq);
 	char* getArquivo();
 };
-
 
 

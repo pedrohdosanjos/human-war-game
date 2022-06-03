@@ -4,11 +4,14 @@
 
 class FaseMedia
 {
-private:
+public:
+	//Elements of this level
 	Soldado Romano;
 	Fogo Fogo;
 
 public:
+	//Constructor/Destructor
+
 	FaseMedia();
 	~FaseMedia();
 };
