@@ -1,11 +1,19 @@
 #include "Militar.h"
 
-Militar::Militar():Inimigo()
+Militar::Militar() :Inimigo()
 {
-    
+	this->initTexture();
 }
 
 Militar::~Militar()
 {
-	vida = 0;
+
+}
+
+void Militar::initTexture()
+{
+	if (!this->textureSheet.loadFromFile("player.png"))
+	{
+		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
+	}
 }

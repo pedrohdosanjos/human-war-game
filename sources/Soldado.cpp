@@ -1,12 +1,18 @@
 #include "Soldado.h"
 
-Soldado::Soldado():Inimigo()
+Soldado::Soldado() :Inimigo()
 {
-    
+	this->initTexture();
 }
 
 Soldado::~Soldado()
 {
-	vida = 0;
 }
 
+void Soldado::initTexture()
+{
+	if (!this->textureSheet.loadFromFile("player.png"))
+	{
+		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
+	}
+}

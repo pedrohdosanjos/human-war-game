@@ -1,7 +1,7 @@
 #include "Entidade.h"
 #include <string.h>
 
-Entidade::Entidade():Ente()
+Entidade::Entidade() :Ente()
 {
 	x = 0;
 	y = 0;

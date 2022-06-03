@@ -8,8 +8,10 @@
 #include <vector>
 #include <iostream>
 #include<ctime>
-class Player;
+
 class Soldado;
+class Player;
+class Inimigo;
 
 class Jogo
 {
@@ -23,6 +25,8 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
+	sf::View view;
+
 
 
 	//Private functions
@@ -42,10 +46,11 @@ public:
 
 	//Functions
 	void pollEvents();
-	void updateCharacs();
-	void renderPlayer();	
+	void updatePlayer();
+	void renderPlayer();
+	void updateEnemy();
 	void renderEnemy();
-
+	void setView();
 	void update();
 	void render();
 
