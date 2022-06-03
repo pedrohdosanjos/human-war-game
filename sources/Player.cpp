@@ -8,9 +8,20 @@ void Player::initTexture()
 	}
 }
 
+void Player::initPhysics()
+{
+	this->velocityMax = 20.f;
+	this->velocityMin = 1.f;
+	this->acceleration = 3.3f;
+	this->drag = 0.87f;
+	this->gravity = 4.f;
+	this->velocityMaxY = 80.f;
+}
+
 Player::Player():Personagem()
 {
 	this->initTexture();
+	this->initPhysics();
 }
 
 Player::~Player()

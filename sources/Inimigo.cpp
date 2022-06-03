@@ -1,46 +1,40 @@
 #include "Inimigo.h"
 
-void Inimigo::initTexture()
-{
-	if (!this->textureSheet.loadFromFile("player.png"))
-	{
-		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
-	}
-}
-
-Inimigo::Inimigo(): Personagem()
-{
-	this->initTexture();
-}
-
-Inimigo::~Inimigo()
-{
-}
-
 sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 {
 	this->animState = IDLE;
 
 	if (this->getPosition().x > pos.x)
 	{
-		this->move(-0.5, 0.f);
+		this->move(-1.f, 0.f);
 		this->animState = MOVING_LEFT;
 	}
 
-	else if(this->getPosition().x < pos.x)
+	else if (this->getPosition().x < pos.x)
 	{
-		this->move(0.5, 0.f);
+		this->move(1.f, 0.f);
 		this->animState = MOVING_RIGHT;
-	}
-
-	if(this->getPosition().y < pos.y)
-	{
-		this->move(0.f, 2.f);
-		this->animState = JUMPING;
 	}
 
 	return pos;
 }
 
+void Inimigo::initPhysics()
+{
+	this->velocityMax = 10.f;
+	this->velocityMin = 1.f;
+	this->acceleration = 3.f;
+	this->drag = 0.8f;
+	this->gravity = 4.f;
+	this->velocityMaxY = 80.f;
+}
 
+Inimigo::Inimigo(): Personagem()
+{
+	this->initPhysics();
+}
+
+Inimigo::~Inimigo()
+{
+}
 

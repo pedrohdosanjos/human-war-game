@@ -1,23 +1,9 @@
 #include "Personagem.h"
 
-void Personagem::initPhysics()
-{
-	this->velocityMax = 20.f;
-	this->velocityMin = 1.f;
-	this->acceleration = 3.3f;
-	this->drag = 0.87f;
-	this->gravity = 4.f;
-	this->velocityMaxY = 80.f;
-}
-
 void Personagem::initVariables()
 {
 	this->animState = IDLE;
 
-}
-
-void Personagem::initTexture()
-{
 }
 
 void Personagem::initSprite()
@@ -38,11 +24,8 @@ void Personagem::initAnimations()
 Personagem::Personagem()
 {
 	this->initVariables();
-	this->initTexture();
 	this->initSprite();
 	this->initAnimations();
-	this->initPhysics();
-
 }
 
 Personagem::~Personagem()
@@ -77,10 +60,6 @@ void Personagem::setPosition(const float x, const float y)
 void Personagem::resetVelocityY()
 {
 	this->velocity.y = 0.f;
-}
-
-sf::Vector2f Personagem::updateMovement(sf::Vector2f pos)
-{
 }
 
 void Personagem::updateAnimations()
@@ -181,9 +160,8 @@ void Personagem::move(const float x, const float y)
 	}
 
 	//Jumping 
-	this->velocity.y = -sqrtf(y * 980.f * JUMPING_HEIGHT);
+	this->velocity.y = -sqrt(y * 980.f * JUMPING_HEIGHT);
 }
-
 
 void Personagem::updatePhysics()
 {
