@@ -1,55 +1,26 @@
 #include "Entidade.h"
 #include <string.h>
 
-Entidade::Entidade() :Ente()
+Entidade::Entidade()
 {
-	x = 0;
-	y = 0;
-
-	dano = 0;
-	*arquivo_png = NULL;
 }
 
 Entidade::~Entidade()
 {
 }
 
-void Entidade::setX(int posx)
+void Entidade::render(sf::RenderTarget& target)
 {
-	x = posx;
+	target.draw(this->sprite);
 }
 
-int Entidade::getX()
+
+void Entidade::setPosition(const float x, const float y)
 {
-	return x;
+	this->sprite.setPosition(x, y);
 }
 
-void Entidade::setY(int posy)
+const sf::Vector2f Entidade::getPosition() const
 {
-	y = posy;
-}
-
-int Entidade::getY()
-{
-	return y;
-}
-
-void Entidade::setDano(int dn)
-{
-	dano = dn;
-}
-
-int Entidade::getDano()
-{
-	return dano;
-}
-
-void Entidade::setArquivo(const char* arq)
-{
-	strcpy_s(arquivo_png, arq);
-}
-
-char* Entidade::getArquivo()
-{
-	return arquivo_png;
+	return this->sprite.getPosition();
 }

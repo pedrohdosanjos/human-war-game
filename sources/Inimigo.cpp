@@ -1,10 +1,40 @@
 #include "Inimigo.h"
 
+void Inimigo::initSprite()
+{
+	this->sprite.setTexture(this->textureSheet);
+	this->currentFrame = sf::IntRect(0, 0, 40, 50); //40 por 50 
+
+	this->sprite.setTextureRect(this->currentFrame);
+	this->sprite.setScale(3.f, 3.f);
+	this->sprite.setColor(sf::Color(255, 0, 0));
+}
+
+void Inimigo::initPhysics()
+{
+	this->velocityMax = 8.f;
+	this->velocityMin = 1.f;
+	this->acceleration = 3.f;
+	this->drag = 0.8f;
+	this->gravity = 4.f;
+	this->velocityMaxY = 80.f;
+}
+
+Inimigo::Inimigo(): Personagem()
+{
+	this->initPhysics();
+	this->initSprite();
+}
+
+Inimigo::~Inimigo()
+{
+}
+
 sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 {
 	this->animState = IDLE;
 
-	if (this->getPosition().x > pos.x)
+	if (this->getPosition().x - pos.x < 600 && this->getPosition().x > pos.x)
 	{
 		this->move(-1.f, 0.f);
 		this->animState = MOVING_LEFT;
@@ -17,29 +47,4 @@ sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 	}
 
 	return pos;
-}
-
-void Inimigo::initTexture()
-{
-}
-
-void Inimigo::initPhysics()
-{
-	this->velocityMax = 10.f;
-	this->velocityMin = 1.f;
-	this->acceleration = 3.f;
-	this->drag = 0.8f;
-	this->gravity = 4.f;
-	this->velocityMaxY = 80.f;
-}
-
-
-
-Inimigo::Inimigo() : Personagem()
-{
-	this->initPhysics();
-}
-
-Inimigo::~Inimigo()
-{
 }

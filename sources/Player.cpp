@@ -8,6 +8,16 @@ void Player::initTexture()
 	}
 }
 
+void Player::initSprite()
+{
+	this->sprite.setTexture(this->textureSheet);
+	this->currentFrame = sf::IntRect(0, 0, 40, 50); //40 por 50 
+
+	this->sprite.setTextureRect(this->currentFrame);
+	this->sprite.setScale(3.f, 3.f);
+}
+
+
 void Player::initPhysics()
 {
 	this->velocityMax = 20.f;
@@ -18,9 +28,10 @@ void Player::initPhysics()
 	this->velocityMaxY = 80.f;
 }
 
-Player::Player() :Personagem()
+Player::Player():Personagem()
 {
 	this->initTexture();
+	this->initSprite();
 	this->initPhysics();
 }
 
@@ -42,7 +53,7 @@ sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 	{
 		this->move(1.f, 0.f);
 		this->animState = MOVING_RIGHT;
-	}
+	}	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && canJump)//Right
 	{
 		this->canJump = false;
@@ -52,3 +63,4 @@ sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 
 	return this->getPosition();
 }
+

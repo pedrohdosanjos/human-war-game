@@ -1,8 +1,8 @@
 #include "Militar.h"
 
-Militar::Militar() :Inimigo()
+Militar::Militar():Inimigo()
 {
-	this->initTexture();
+    this->initTexture();
 }
 
 Militar::~Militar()
