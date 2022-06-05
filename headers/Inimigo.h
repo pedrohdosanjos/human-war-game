@@ -1,19 +1,14 @@
 #pragma once
 #include "Personagem.h"
 
-class Inimigo : public Personagem
+class Inimigo: public Personagem
 {
-
-private:
-	//Funções Privadas
-	virtual void initTexture();
-	void initPhysics();
-
-
 public:
-	//Funções Públicas
-	sf::Vector2f updateMovement(sf::Vector2f pos);
 
+	sf::Vector2f updateMovement(sf::Vector2f pos);
+	virtual void initTexture() = 0;
+	void initSprite();
+	void initPhysics();
 
 	//Constructor / Destructor
 	Inimigo();

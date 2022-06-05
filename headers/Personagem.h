@@ -1,23 +1,18 @@
 #pragma once
-#include "Jogo.h"
+#include "Entidade.h"
 
 #define JUMPING_HEIGHT 200.f
 
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
 
-class Personagem
+class Personagem: public Entidade
 {
 protected:
-	//Animation
-	sf::Sprite sprite;
-	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 
 	//Animation
-	short animState;
-	sf::IntRect currentFrame;
 	bool animationSwitch;
-
+	short animState;
 
 	//Physics
 	sf::Vector2f velocity;
@@ -31,33 +26,34 @@ protected:
 	//Core
 	virtual void initPhysics() = 0;
 	virtual void initTexture() = 0;
+	virtual void initSprite() = 0;
 	void initVariables();
-	void initSprite();
 	void initAnimations();
 
+
 public:
+
 	//Constructor / Destructor
 	Personagem();
 	~Personagem();
 
+
 	//Accessors
-	const bool& getAnimSwitch();
 	const sf::FloatRect getGlobalBounds() const;
-	const sf::Vector2f getPosition() const;
+	const bool& getAnimSwitch();
 	bool canJump;
 
+
 	//Modifiers
-	void setPosition(const float x, const float y);
 	void resetVelocityY();
+
 
 	//Functions
 	virtual sf::Vector2f updateMovement(sf::Vector2f pos) = 0;
 	void move(const float x, const float y);
-	void render(sf::RenderTarget& target);
 	void resetAnimationTimer();
 	void updateAnimations();
 	void updatePhysics();
+
 	void update();
-
-
 };

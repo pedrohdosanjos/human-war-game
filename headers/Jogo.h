@@ -8,10 +8,9 @@
 #include <vector>
 #include <iostream>
 #include<ctime>
-
-class Soldado;
 class Player;
-class Inimigo;
+class Soldado;
+class Plataforma;
 
 class Jogo
 {
@@ -19,7 +18,7 @@ private:
 	//Variables
 	Player* player;
 	Soldado* soldier;
-
+	Plataforma* platform;
 
 	//Window
 	sf::RenderWindow* window;
@@ -28,12 +27,12 @@ private:
 	sf::View view;
 
 
-
 	//Private functions
 	void initVariables();
 	void initWindow();
 	void initPlayer();
 	void initEnemy();
+	void initPlat();
 
 
 public:
@@ -46,11 +45,13 @@ public:
 
 	//Functions
 	void pollEvents();
-	void updatePlayer();
-	void renderPlayer();
-	void updateEnemy();
+	void updateCharacs();
+	void renderPlayer();	
 	void renderEnemy();
+	void renderPlat();
+
 	void setView();
+
 	void update();
 	void render();
 

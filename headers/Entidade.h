@@ -1,32 +1,28 @@
 #pragma once
-#include "Ente.h"
+#include "Jogo.h"
 
-class Entidade : public Ente
+class Entidade
 {
 protected:
-	//Protected variables
-	int x;
-	int y;
-	int dano;
-	char arquivo_png[30];
+	
+	sf::Sprite sprite;
+	sf::Texture textureSheet;
+
+	sf::IntRect currentFrame;
 
 public:
-	//Constructor/Destructor
 	Entidade();
 	~Entidade();
 
-	//Public Functions
-	void setX(int posx);
-	int getX();
+	virtual void initTexture() = 0;
+	virtual void initSprite() = 0;
 
-	void setY(int posy);
-	int getY();
+	void setPosition(const float x, const float y);
+	const sf::Vector2f getPosition() const;
 
-	void setDano(int dn);
-	int getDano();
+	void render(sf::RenderTarget& target);
 
-	void setArquivo(const char* arq);
-	char* getArquivo();
 };
+
 
 

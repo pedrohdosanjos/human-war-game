@@ -4,7 +4,6 @@
 class Arame :public Obstaculo
 {
 public:
-	//Constructor/Destructor
 	Arame();
 	~Arame();
 };

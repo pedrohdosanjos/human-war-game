@@ -6,7 +6,7 @@ class FaseContemp
 {
 public:
 	//Militar Britanico;
-	Arame Farpado;
+	//Arame Farpado;
 
 public:
 	FaseContemp();
