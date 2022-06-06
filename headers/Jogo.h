@@ -26,6 +26,8 @@ private:
 	sf::Event ev;
 	sf::View view;
 
+	//Background
+	sf::Sprite background;
 
 	//Private functions
 	void initVariables();
@@ -33,6 +35,7 @@ private:
 	void initPlayer();
 	void initEnemy();
 	void initPlat();
+	void initBackground();
 
 
 public:
@@ -57,4 +60,5 @@ public:
 
 	//Collision
 	void updateCollision();
+	void checkCollision();
 };
