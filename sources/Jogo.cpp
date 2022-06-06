@@ -32,7 +32,21 @@ void Jogo::initEnemy()
 void Jogo::initPlat()
 {
 	this->platform = new Plataforma();
-	this->platform->setPosition(640, 360);
+	this->platform->setPosition(500.f, 450.f);
+}
+
+void Jogo::initBackground()
+{
+	sf::Texture back;
+
+	if (!back.loadFromFile("background.png"))
+	{
+		printf("ERRO ao carregar background");
+	}
+
+	back.setRepeated(true);
+	background.setTexture(back);
+	background.setTextureRect(sf::IntRect(0, 0, 1280, 720));
 }
 
 
@@ -41,6 +55,7 @@ Jogo::Jogo()
 {
 	this->initVariables();
 	this->initWindow();
+	this->initBackground();
 	this->initPlayer();
 	this->initEnemy();
 	this->initPlat();
@@ -142,6 +157,56 @@ void Jogo::updateCollision()
 			this->soldier->getPosition().x,
 			this->window->getSize().y - this->soldier->getGlobalBounds().height);
 	}
+
+
+}
+
+void Jogo::checkCollision()
+{
+	//Colliding Player and Platform
+
+	sf::Vector2f centerDist;
+	sf::Vector2f collision;
+
+
+	centerDist.x = player->getPosition().x - platform->getPosition().x;
+	centerDist.y = player->getPosition().y - platform->getPosition().y;
+
+	collision.x = abs(centerDist.x) - (this->player->getSize().x / 2.0f + this->platform->getSize().x / 2.0f);
+	collision.y = abs(centerDist.y) - (this->player->getSize().y / 2.0f + this->platform->getSize().y / 2.0f);
+
+	printf("%f %f\n", collision.x, collision.y);
+
+	if (collision.x < 0.0f && collision.y < 0.0f)
+	{
+		if (collision.x > collision.y)
+		{
+			if (centerDist.x > 0.0f)
+			{
+				this->player->setPosition(this->player->getPosition().x - collision.x, this->player->getPosition().y);
+			}
+			else
+			{
+				this->player->setPosition(this->player->getPosition().x + collision.x, this->player->getPosition().y);
+			}
+			this->player->resetVelocityX();
+		}
+		else
+		{
+			if (centerDist.y > 0.0f)
+			{
+				this->player->canJump = true;
+				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y - collision.y);
+			}
+			else
+			{
+				this->player->canJump = true;
+				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y + collision.y);
+			}
+			this->player->resetVelocityY();
+		}
+	}
+
 }
 
 //funções da main
@@ -154,6 +219,9 @@ void Jogo::update()
 
 void Jogo::render()
 {
+	//Collision
+	this->checkCollision();
+
 	//View settings
 	this->setView();
 
@@ -164,6 +232,8 @@ void Jogo::render()
 	this->window->setView(this->view);
 
 	//Draw game objects
+
+	//this->window->draw(background);
 	this->renderPlayer();
 	this->renderEnemy();
 	this->renderPlat();
