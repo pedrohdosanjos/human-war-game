@@ -1,6 +1,6 @@
 #include "Soldado.h"
 
-Soldado::Soldado():Inimigo()
+Soldado::Soldado() :Inimigo()
 {
 	this->initTexture();
 }

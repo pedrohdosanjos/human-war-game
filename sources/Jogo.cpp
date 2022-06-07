@@ -1,4 +1,4 @@
-#include "Jogo.h"
+ï»¿#include "Jogo.h"
 #include "Player.h"
 #include "Soldado.h"
 #include "Plataforma.h"
@@ -175,7 +175,6 @@ void Jogo::checkCollision()
 	collision.x = abs(centerDist.x) - (this->player->getSize().x / 2.0f + this->platform->getSize().x / 2.0f);
 	collision.y = abs(centerDist.y) - (this->player->getSize().y / 2.0f + this->platform->getSize().y / 2.0f);
 
-	printf("%f %f\n", collision.x, collision.y);
 
 	if (collision.x < 0.0f && collision.y < 0.0f)
 	{
@@ -194,22 +193,21 @@ void Jogo::checkCollision()
 		else
 		{
 			if (centerDist.y > 0.0f)
-			{
-				this->player->canJump = true;
+			{		
 				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y - collision.y);
 			}
 			else
-			{
-				this->player->canJump = true;
+			{	
 				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y + collision.y);
 			}
 			this->player->resetVelocityY();
+			this->player->canJump = true;
 		}
 	}
 
 }
 
-//funções da main
+//funï¿½ï¿½es da main
 
 void Jogo::update()
 {

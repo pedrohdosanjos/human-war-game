@@ -28,7 +28,8 @@ void Player::initPhysics()
 	this->velocityMaxY = 80.f;
 }
 
-Player::Player():Personagem()
+
+Player::Player() :Personagem()
 {
 	this->initTexture();
 	this->initSprite();
@@ -38,6 +39,8 @@ Player::Player():Personagem()
 Player::~Player()
 {
 }
+
+
 
 sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 {
@@ -53,7 +56,7 @@ sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 	{
 		this->move(1.f, 0.f);
 		this->animState = MOVING_RIGHT;
-	}	
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && canJump)//Right
 	{
 		this->canJump = false;

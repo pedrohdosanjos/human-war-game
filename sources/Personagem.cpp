@@ -1,4 +1,4 @@
-#include "Personagem.h"
+ï»¿#include "Personagem.h"
 
 void Personagem::initVariables()
 {
@@ -14,7 +14,7 @@ void Personagem::initAnimations()
 }
 
 
-Personagem::Personagem():Entidade()
+Personagem::Personagem() :Entidade()
 {
 	this->initVariables();
 	this->initAnimations();
@@ -67,7 +67,7 @@ void Personagem::move(const float x, const float y)
 		//Limit velocity
 		if (std::abs(this->velocity.x) > this->velocityMax)
 		{
-			this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
+			this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a direï¿½ï¿½o do movimento
 		}
 	}
 	else
@@ -87,9 +87,9 @@ void Personagem::updateAnimations()
 			this->currentFrame.top = 0.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 160.f) //valor usado para o png em questão
+			if (this->currentFrame.left >= 160.f) //valor usado para o png em questï¿½o
 			{
-				this->currentFrame.left = 0; //Reiniciando a animação
+				this->currentFrame.left = 0; //Reiniciando a animaï¿½ï¿½o
 			}
 
 			this->animationTimer.restart();
@@ -103,9 +103,9 @@ void Personagem::updateAnimations()
 			this->currentFrame.top = 50.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 360.f) //valor usado para o png em questão
+			if (this->currentFrame.left >= 360.f) //valor usado para o png em questï¿½o
 			{
-				this->currentFrame.left = 0; //Reiniciando a animação
+				this->currentFrame.left = 0; //Reiniciando a animaï¿½ï¿½o
 			}
 
 			this->animationTimer.restart();
@@ -122,9 +122,9 @@ void Personagem::updateAnimations()
 			this->currentFrame.top = 50.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 360.f) //valor usado para o png em questão
+			if (this->currentFrame.left >= 360.f) //valor usado para o png em questï¿½o
 			{
-				this->currentFrame.left = 0; //Reiniciando a animação
+				this->currentFrame.left = 0; //Reiniciando a animaï¿½ï¿½o
 			}
 
 			this->animationTimer.restart();
@@ -160,7 +160,7 @@ void Personagem::updatePhysics()
 	//Limit gravity
 	if (std::abs(this->velocity.y) > this->velocityMaxY)
 	{
-		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a direção do movimento
+		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a direï¿½ï¿½o do movimento
 	}
 
 

@@ -21,7 +21,7 @@ void Entidade::setPosition(const float x, const float y)
 }
 
 const sf::Vector2f Entidade::getPosition() const
-{	
+{
 	return (this->sprite.getPosition());
 }
 
