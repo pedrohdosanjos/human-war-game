@@ -47,6 +47,13 @@ void Personagem::resetVelocityY()
 	this->velocity.y = 0.f;
 }
 
+void Personagem::resetVelocityX()
+{
+	this->velocity.x = 0.f;
+
+}
+
+
 
 void Personagem::move(const float x, const float y)
 {

@@ -18,6 +18,7 @@ void Plataforma::initSprite()
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(3.f, 3.f);
+	this->sprite.setTextureRect(sf::IntRect(0, 0, 100, 22));
 }
 
 void Plataforma::initTexture()
