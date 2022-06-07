@@ -3,7 +3,7 @@
 
 class Plataforma :public Obstaculo
 {
-public: 
+public:
 	//Constructor/Destructor
 	Plataforma();
 	~Plataforma();
@@ -13,4 +13,3 @@ public:
 	void initSprite();
 
 };
-

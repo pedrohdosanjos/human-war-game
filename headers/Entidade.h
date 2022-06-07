@@ -4,7 +4,7 @@
 class Entidade
 {
 protected:
-	
+
 	//Protected Variables for Animation
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
@@ -31,6 +31,5 @@ public:
 
 
 };
-
 
 

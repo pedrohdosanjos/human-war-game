@@ -5,8 +5,9 @@
 
 class Ente
 {
+
 public:
+	//Constructor/Destructor
 	Ente();
 	~Ente();
 };
-

@@ -4,11 +4,13 @@
 
 class FaseMedia
 {
-public:
+protected:
+	//Class Variables
 	//Soldado Romano;
 	//Fogo Fogo;
 
 public:
+	//Constructor/Destructor
 	FaseMedia();
 	~FaseMedia();
 };

@@ -49,7 +49,7 @@ public:
 	//Functions
 	void pollEvents();
 	void updateCharacs();
-	void renderPlayer();	
+	void renderPlayer();
 	void renderEnemy();
 	void renderPlat();
 

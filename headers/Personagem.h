@@ -5,7 +5,7 @@
 
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
 
-class Personagem: public Entidade
+class Personagem : public Entidade
 {
 protected:
 	sf::Clock animationTimer;

@@ -4,11 +4,13 @@
 
 class FaseContemp
 {
-public:
+protected:
+	//Class Variables
 	//Militar Britanico;
 	//Arame Farpado;
 
 public:
+	//Constructor/Destructor
 	FaseContemp();
 	~FaseContemp();
 };
