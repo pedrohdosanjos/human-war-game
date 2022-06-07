@@ -46,6 +46,7 @@ public:
 
 	//Modifiers
 	void resetVelocityY();
+	void resetVelocityX();
 
 
 	//Functions
