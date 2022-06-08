@@ -1,6 +1,7 @@
 #pragma once
 #include "Entidade.h"
 
+
 #define JUMPING_HEIGHT 200.f
 
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };

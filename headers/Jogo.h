@@ -8,6 +8,9 @@
 #include <vector>
 #include <iostream>
 #include<ctime>
+
+class Fase;
+class ListaEntidades;
 class Player;
 class Soldado;
 class Plataforma;
@@ -17,8 +20,8 @@ class Jogo
 private:
 	//Variables
 	Player* player;
-	Soldado* soldier;
-	Plataforma* platform;
+	ListaEntidades* LEs;
+	Fase* fase1;
 
 	//Window
 	sf::RenderWindow* window;
@@ -26,16 +29,14 @@ private:
 	sf::Event ev;
 	sf::View view;
 
-	//Background
-	sf::Sprite background;
+	
 
 	//Private functions
 	void initVariables();
 	void initWindow();
 	void initPlayer();
-	void initEnemy();
-	void initPlat();
-	void initBackground();
+	void initFase();
+
 
 
 public:
@@ -48,17 +49,11 @@ public:
 
 	//Functions
 	void pollEvents();
-	void updateCharacs();
-	void renderPlayer();
-	void renderEnemy();
-	void renderPlat();
+
 
 	void setView();
 
 	void update();
 	void render();
 
-	//Collision
-	void updateCollision();
-	void checkCollision();
 };

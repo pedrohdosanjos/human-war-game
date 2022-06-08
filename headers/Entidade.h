@@ -1,6 +1,5 @@
 #pragma once
 #include "Jogo.h"
-
 class Entidade
 {
 protected:
@@ -9,6 +8,7 @@ protected:
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	sf::IntRect currentFrame;
+	sf::RenderWindow* window;
 
 
 
@@ -27,8 +27,9 @@ public:
 	const sf::Vector2f getSize() const;
 
 	//Animation Functions
-	void render(sf::RenderTarget& target);
-
+	void draw(sf::RenderTarget& target) { target.draw(this->sprite); }
+	void setWindow(sf::RenderWindow* window) { this->window = window; }
+	sf::RenderWindow* getWindow() { return this->window; }
 
 };
 
