@@ -6,7 +6,7 @@ class Inimigo : public Personagem
 protected:
 
 	//Protected Functions
-	virtual void initTexture() = 0;
+	virtual void initTexture();
 	void initSprite();
 	void initPhysics();
 
