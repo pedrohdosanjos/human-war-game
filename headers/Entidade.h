@@ -8,11 +8,10 @@ protected:
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	sf::IntRect currentFrame;
-	sf::RenderWindow* window;
-
-
 
 public:
+	GerenciadorGrafico* graphicManager;
+
 	//Constructor/Destructor
 	Entidade();
 	~Entidade();
@@ -28,9 +27,6 @@ public:
 
 	//Animation Functions
 	void draw(sf::RenderTarget& target) { target.draw(this->sprite); }
-	void setWindow(sf::RenderWindow* window) { this->window = window; }
-	sf::RenderWindow* getWindow() { return this->window; }
 
 };
-
 

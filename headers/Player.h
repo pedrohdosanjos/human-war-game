@@ -20,5 +20,4 @@ public:
 
 	//Public Functions
 	sf::Vector2f updateMovement(sf::Vector2f pos);
-
 };
