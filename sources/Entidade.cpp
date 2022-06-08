@@ -1,7 +1,8 @@
 #include "Entidade.h"
 #include <string.h>
 
-Entidade::Entidade()
+Entidade::Entidade():
+	graphicManager(GerenciadorGrafico::getInstance())
 {
 }
 

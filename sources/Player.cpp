@@ -66,4 +66,3 @@ sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 
 	return this->getPosition();
 }
-
