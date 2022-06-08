@@ -1,5 +1,9 @@
 #include "Inimigo.h"
 
+void Inimigo::initTexture()
+{
+}
+
 void Inimigo::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
@@ -20,7 +24,7 @@ void Inimigo::initPhysics()
 	this->velocityMaxY = 80.f;
 }
 
-Inimigo::Inimigo(): Personagem()
+Inimigo::Inimigo() : Personagem()
 {
 	this->initPhysics();
 	this->initSprite();
