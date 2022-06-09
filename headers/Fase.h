@@ -1,12 +1,14 @@
-#pragma once
+ï»¿#pragma once
 #include <SFML/Graphics.hpp>
+#include "GeradorDeMundo.h"
+
 class Player;
 class Soldado;
 class Plataforma;
 class ListaEntidades;
 
 /*
-	No futuro essa será uma das fases(em específico a Contemp) e não a classe fase pronta;
+	No futuro essa serï¿½ uma das fases(em especï¿½fico a Contemp) e nï¿½o a classe fase pronta;
 	A fase vai so chamar uma das duas e nelas serao instanciados os objetos da fase.
 */
 class Fase
@@ -19,12 +21,16 @@ private:
 	Player* player;
 	sf::RenderWindow* window;
 
+	GeradorDeMundo worldGen;
+	sf::Vector2f proxRender;
+
 	//Private Functions
 	void initVariables();
 	void initPosition();
 
 public:
 	//Constructor/Destructor
+	Fase();
 	Fase(Player* j1, sf::RenderWindow* window);
 	~Fase();
 
