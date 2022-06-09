@@ -1,5 +1,4 @@
 #include "Fase.h"
-#include "Player.h"
 #include "Soldado.h"
 #include "Plataforma.h"
 #include "ListaEntidades.h"
@@ -13,17 +12,22 @@ void Fase::initVariables()
 
 void Fase::initPosition()
 {
-	this->soldier->setPosition(1280,720);
+	this->soldier->setPosition(1280, 720);
 	this->platform->setPosition(500.f, 450.f);
 }
 
-Fase::Fase(Player* j1, sf::RenderWindow* window)
+Fase::Fase(Player* j1, sf::RenderWindow* window):worldGen(listaEntidades)
 {
 	this->window = window;
 	this->player = j1;
 	this->listaEntidades = new ListaEntidades();
 	this->soldier = new Soldado();
-	this->platform = new Plataforma();
+
+	proxRender = sf::Vector2f(0, 0);
+	worldGen.resetToOrigin();
+	//worldGen.generate(&proxRender, player);
+
+	this->platform = new Plataforma(sf::Vector2f(0,0));
 	initVariables();
 	initPosition();
 }

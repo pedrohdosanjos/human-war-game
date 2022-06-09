@@ -15,6 +15,7 @@ void Jogo::initVariables()
 void Jogo::initPlayer()
 {
 	this->player = new Player();
+	this->player->setPosition(0, 0);
 }
 
 void Jogo::initFase()
@@ -23,7 +24,7 @@ void Jogo::initFase()
 }
 
 //Constructor / Destructor
-Jogo::Jogo():
+Jogo::Jogo() :
 	graphicManager(GerenciadorGrafico::getInstance())
 {
 	this->initPlayer();
