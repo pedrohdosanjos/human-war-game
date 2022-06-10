@@ -1,8 +1,9 @@
 #include "Entidade.h"
 #include <string.h>
 
-Entidade::Entidade():
-	graphicManager(GerenciadorGrafico::getInstance())
+Entidade::Entidade(ID id) :
+	graphicManager(GerenciadorGrafico::getInstance()),
+	id(id)
 {
 }
 
@@ -24,3 +25,11 @@ const sf::Vector2f Entidade::getSize() const
 {
 	return sf::Vector2f(this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().height);
 }
+
+ID Entidade::getID() const
+{
+	return this->id;
+}
+
+
+

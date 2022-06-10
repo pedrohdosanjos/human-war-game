@@ -1,6 +1,7 @@
 #include "Plataforma.h"
 
-Plataforma::Plataforma()
+Plataforma::Plataforma():
+	Obstaculo(id = platform)
 {
 	this->initSprite();
 	this->initTexture();

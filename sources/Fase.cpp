@@ -6,14 +6,20 @@
 
 void Fase::initVariables()
 {
-	listaEntidades->LEs.push(player);
-	listaEntidades->LEs.push(soldier);
-	listaEntidades->LEs.push(platform);
+	//listaEntidades->LEs.push(player);
+	//listaEntidades->LEs.push(soldier);
+	//listaEntidades->LEs.push(platform);
+
+	movingEntities->LEs.push(this->player);
+	movingEntities->LEs.push(this->soldier);
+	staticEntities->LEs.push(this->platform);
+
+	collider = new Collider(movingEntities, staticEntities);
 }
 
 void Fase::initPosition()
 {
-	this->soldier->setPosition(1280,720);
+	this->soldier->setPosition(1280, 720);
 	this->platform->setPosition(500.f, 450.f);
 }
 
@@ -21,7 +27,9 @@ Fase::Fase(Player* j1, sf::RenderWindow* window)
 {
 	this->window = window;
 	this->player = j1;
-	this->listaEntidades = new ListaEntidades();
+	//this->listaEntidades = new ListaEntidades();
+	this->movingEntities = new ListaEntidades();
+	this->staticEntities = new ListaEntidades();
 	this->soldier = new Soldado();
 	this->platform = new Plataforma();
 	initVariables();
@@ -31,6 +39,7 @@ Fase::Fase(Player* j1, sf::RenderWindow* window)
 Fase::~Fase()
 {
 }
+
 
 void Fase::updateCollision()
 {
@@ -56,8 +65,11 @@ void Fase::updateCollision()
 
 }
 
+
 void Fase::checkCollision()
 {
+	this->collider->collide();
+	/*
 	//Colliding Player and Platform
 	sf::Vector2f centerDist;
 	sf::Vector2f collision;
@@ -98,7 +110,7 @@ void Fase::checkCollision()
 			this->player->canJump = true;
 		}
 	}
-
+*/
 }
 
 void Fase::updateCharacs()
@@ -107,6 +119,7 @@ void Fase::updateCharacs()
 	this->soldier->update();
 	this->player->update();
 }
+
 
 void Fase::resetAnimationTimer()
 {

@@ -1,6 +1,7 @@
 #include "Soldado.h"
 
-Soldado::Soldado() :Inimigo()
+Soldado::Soldado() :
+	Inimigo(id = soldier)
 {
 	this->initTexture();
 }
@@ -16,3 +17,4 @@ void Soldado::initTexture()
 		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
 	}
 }
+

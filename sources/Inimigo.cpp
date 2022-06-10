@@ -24,7 +24,8 @@ void Inimigo::initPhysics()
 	this->velocityMaxY = 80.f;
 }
 
-Inimigo::Inimigo() : Personagem()
+Inimigo::Inimigo(ID id) : 
+	Personagem(id)
 {
 	this->initPhysics();
 	this->initSprite();
@@ -51,4 +52,20 @@ sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 	}
 
 	return pos;
+}
+
+void Inimigo::collide(Entidade* otherEntity, sf::Vector2f intersect)
+{
+	if (otherEntity->getID() == platform)
+	{
+		moveOnCollision(intersect, otherEntity);
+	}
+	else if (otherEntity->getID() == fire)
+	{
+		//Function to give damage to player
+	}
+	else if (otherEntity->getID() == player)
+	{
+		//Function to give damage to player
+	}
 }

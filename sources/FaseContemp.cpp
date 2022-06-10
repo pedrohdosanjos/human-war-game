@@ -2,11 +2,10 @@
 
 FaseContemp::FaseContemp()
 {
-    
+
 }
 
 FaseContemp::~FaseContemp()
 {
 
 }
-
