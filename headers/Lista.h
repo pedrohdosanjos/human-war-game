@@ -1,7 +1,7 @@
-ï»¿#pragma once
+#pragma once
 #include "Elemento.h"
 
-template <class TL> class Lista {
+template <class TL> class Lista{
 private:
 	//List elements
 	Elemento<TL>* pPrimeiro;
@@ -35,7 +35,7 @@ public:
 		{
 			pPrimeiro = new Elemento<TL>;
 			pPrimeiro->setpInfo(info);
-			pUltimo = pPrimeiro; //quando so tem 1 elemento, ele eh o primeiro e o ultimo
+			pUltimo = pPrimeiro; //quando só tem 1 elemento, ele eh o primeiro e o ultimo
 		}
 		else
 		{

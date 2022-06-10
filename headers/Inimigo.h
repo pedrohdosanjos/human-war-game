@@ -13,10 +13,13 @@ protected:
 public:
 
 	//Constructor / Destructor
-	Inimigo();
+	Inimigo(ID id = empty);
 	~Inimigo();
 
 	//Public Functions
 	sf::Vector2f updateMovement(sf::Vector2f pos);
+
+	//Collision
+	void collide(Entidade* otherEntity, sf::Vector2f intersect);
 
 };

@@ -19,19 +19,20 @@ class Plataforma;
 class Jogo
 {
 private:
-	//manager
+	//Manager
 	GerenciadorGrafico* graphicManager;
 
 	//Variables
 	Player* player;
-	ListaEntidades* LEs;
+	ListaEntidades* LMEs;
+	ListaEntidades* LSEs;
 	Fase* fase1;
 
 	//Window
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
-	//sf::View view;
+
 
 	//Private functions
 	void initVariables();
@@ -49,9 +50,10 @@ public:
 	//Functions
 	void pollEvents();
 
-
+	//View Setting
 	void setView();
 
+	//Game loop
 	void update();
 	void render();
 

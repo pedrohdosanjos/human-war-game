@@ -33,6 +33,7 @@ inline Elemento<TE>::Elemento()
 }
 
 template<class TE>
-inline Elemento<TE>::~Elemento() {
+inline Elemento<TE>::~Elemento(){
 
 }
+

@@ -5,14 +5,19 @@
 class GerenciadorGrafico
 {
 private:
+    //SFML Variables
     sf::RenderWindow* window;
     sf::View view;
+    sf::Clock dtClock;
+    float dt;
+    
 
     // Singleton design pattern
     static GerenciadorGrafico* instance;
     GerenciadorGrafico();
 
 public:
+
     ~GerenciadorGrafico();
 
     static GerenciadorGrafico* getInstance();
@@ -37,10 +42,9 @@ public:
 
     sf::Texture* loadTexture(const char* arquivo);
 
-    float updateDeltaTime();
+    void updateDeltaTime();
 
     sf::RenderWindow* getWindow() const;
 
 };
-
 

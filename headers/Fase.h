@@ -1,23 +1,28 @@
-#pragma once
+ï»¿#pragma once
 #include <SFML/Graphics.hpp>
 class Player;
 class Soldado;
 class Plataforma;
 class ListaEntidades;
+#include "Collider.h"
 
 /*
-	No futuro essa será uma das fases(em específico a Contemp) e não a classe fase pronta;
+	No futuro essa serï¿½ uma das fases(em especï¿½fico a Contemp) e nï¿½o a classe fase pronta;
 	A fase vai so chamar uma das duas e nelas serao instanciados os objetos da fase.
 */
 class Fase
 {
 private:
 	//Private Variables
-	ListaEntidades* listaEntidades;
+	//ListaEntidades* listaEntidades;
+	ListaEntidades* movingEntities;
+	ListaEntidades* staticEntities;
 	Plataforma* platform;
 	Soldado* soldier;
 	Player* player;
+	Collider* collider;
 	sf::RenderWindow* window;
+
 
 	//Private Functions
 	void initVariables();
@@ -29,7 +34,8 @@ public:
 	~Fase();
 
 	//Public Functions
-	ListaEntidades* getListaEntidades() { return listaEntidades; };
+	ListaEntidades* getListaMovingEntidades() { return movingEntities; }
+	ListaEntidades* getListaStaticEntidades() { return staticEntities; }
 
 	//Collision
 	void updateCollision();
