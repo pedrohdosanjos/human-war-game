@@ -3,7 +3,9 @@
 
 int main()
 {
+    //Game Object
     Jogo jogo;
+
     //Game loop
     while (jogo.running())
     {

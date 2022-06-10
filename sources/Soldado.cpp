@@ -16,4 +16,3 @@ void Soldado::initTexture()
 		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
 	}
 }
-

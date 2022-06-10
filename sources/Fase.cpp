@@ -13,14 +13,8 @@ void Fase::initVariables()
 
 void Fase::initPosition()
 {
-	this->soldier->setPosition(this->soldier->getWindow()->getSize().x, this->soldier->getWindow()->getSize().y);
+	this->soldier->setPosition(1280,720);
 	this->platform->setPosition(500.f, 450.f);
-}
-
-void Fase::initWindow()
-{
-	this->soldier->setWindow(this->window);
-	this->platform->setWindow(this->window);
 }
 
 Fase::Fase(Player* j1, sf::RenderWindow* window)
@@ -31,7 +25,6 @@ Fase::Fase(Player* j1, sf::RenderWindow* window)
 	this->soldier = new Soldado();
 	this->platform = new Plataforma();
 	initVariables();
-	initWindow();
 	initPosition();
 }
 
@@ -42,22 +35,22 @@ Fase::~Fase()
 void Fase::updateCollision()
 {
 	//Collision bottom of screen
-	if (this->player->getPosition().y + this->player->getGlobalBounds().height > this->window->getSize().y)
+	if (this->player->getPosition().y + this->player->getGlobalBounds().height > 720)
 	{
 		this->player->canJump = true;
 		this->player->resetVelocityY();
 
 		this->player->setPosition(
 			this->player->getPosition().x,
-			this->window->getSize().y - this->player->getGlobalBounds().height);
+			720 - this->player->getGlobalBounds().height);
 	}
-	if (this->soldier->getPosition().y + this->soldier->getGlobalBounds().height > this->window->getSize().y)
+	if (this->soldier->getPosition().y + this->soldier->getGlobalBounds().height > 720)
 	{
 		this->soldier->resetVelocityY();
 
 		this->soldier->setPosition(
 			this->soldier->getPosition().x,
-			this->window->getSize().y - this->soldier->getGlobalBounds().height);
+			720 - this->soldier->getGlobalBounds().height);
 	}
 
 
@@ -120,4 +113,3 @@ void Fase::resetAnimationTimer()
 	this->player->resetAnimationTimer();
 	this->soldier->resetAnimationTimer();
 }
-

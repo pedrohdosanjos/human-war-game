@@ -22,7 +22,6 @@ private:
 	//Private Functions
 	void initVariables();
 	void initPosition();
-	void initWindow();
 
 public:
 	//Constructor/Destructor
@@ -40,4 +39,3 @@ public:
 	void updateCharacs();
 	void resetAnimationTimer();
 };
-

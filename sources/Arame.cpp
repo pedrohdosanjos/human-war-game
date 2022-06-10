@@ -1,8 +1,8 @@
 #include "Arame.h"
 
-Arame::Arame() :Obstaculo()
+Arame::Arame():Obstaculo()
 {
-
+	
 }
 
 Arame::~Arame()

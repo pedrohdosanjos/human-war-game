@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Network.hpp>
+#include "GerenciadorGrafico.h"
 
 #include <vector>
 #include <iostream>
@@ -18,6 +19,9 @@ class Plataforma;
 class Jogo
 {
 private:
+	//manager
+	GerenciadorGrafico* graphicManager;
+
 	//Variables
 	Player* player;
 	ListaEntidades* LEs;
@@ -27,17 +31,12 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
-	sf::View view;
-
-	
+	//sf::View view;
 
 	//Private functions
 	void initVariables();
-	void initWindow();
 	void initPlayer();
 	void initFase();
-
-
 
 public:
 	//Constructor / Destructor
