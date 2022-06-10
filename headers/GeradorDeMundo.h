@@ -9,12 +9,13 @@ private:
 	sf::Vector2f limiteInf;
 	sf::Vector2f ultimaPos;
 
-	ListaEntidades* listaEntidades;
+	ListaEntidades* staticEntidades;
+	ListaEntidades* movingEntidades;
 
 	unsigned int distancia;
 
 public:
-	GeradorDeMundo(ListaEntidades* listaEntidades, const unsigned int distancia = 20);
+	GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia = 20);
 
 	~GeradorDeMundo();
 
@@ -25,6 +26,5 @@ public:
 	void setDistancia();
 
 	void resetToOrigin();
-	
 };
 

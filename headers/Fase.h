@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
-#include "GeradorDeMundo.h"
-
 class Player;
 class Soldado;
 class Plataforma;
 class ListaEntidades;
+#include "Collider.h"
+#include "GeradorDeMundo.h"
 
 /*
 	No futuro essa ser� uma das fases(em espec�fico a Contemp) e n�o a classe fase pronta;
@@ -15,14 +15,17 @@ class Fase
 {
 private:
 	//Private Variables
-	ListaEntidades* listaEntidades;
-	Plataforma* platform;
+	ListaEntidades* movingEntities;
+	ListaEntidades* staticEntities;
+
 	Soldado* soldier;
 	Player* player;
-	sf::RenderWindow* window;
-
+	Collider* collider;
+	
 	GeradorDeMundo worldGen;
-	sf::Vector2f proxRender;
+	sf::Vector2f posRender;
+
+	sf::RenderWindow* window;
 
 	//Private Functions
 	void initVariables();
@@ -30,12 +33,12 @@ private:
 
 public:
 	//Constructor/Destructor
-	Fase();
 	Fase(Player* j1, sf::RenderWindow* window);
 	~Fase();
 
 	//Public Functions
-	ListaEntidades* getListaEntidades() { return listaEntidades; };
+	ListaEntidades* getListaMovingEntidades() { return movingEntities; }
+	ListaEntidades* getListaStaticEntidades() { return staticEntities; }
 
 	//Collision
 	void updateCollision();
