@@ -1,33 +1,34 @@
 #include "Fase.h"
+#include "Player.h"
 #include "Soldado.h"
 #include "Plataforma.h"
 #include "ListaEntidades.h"
 
 void Fase::initVariables()
 {
-	listaEntidades->LEs.push(player);
-	listaEntidades->LEs.push(soldier);
-	listaEntidades->LEs.push(platform);
+	movingEntities->LEs.push(this->player);
+	movingEntities->LEs.push(this->soldier);
+
+	worldGen.generate(&posRender, player);
+
+	collider = new Collider(movingEntities, staticEntities);
 }
 
 void Fase::initPosition()
 {
-	this->soldier->setPosition(1280, 720);
-	this->platform->setPosition(500.f, 450.f);
+	this->soldier->setPosition(1580, 720);
+	this->player->setPosition(300, 0);
 }
 
-Fase::Fase(Player* j1, sf::RenderWindow* window):worldGen(listaEntidades)
+Fase::Fase(Player* j1, sf::RenderWindow* window):
+	movingEntities(new ListaEntidades()),
+	staticEntities(new ListaEntidades()),
+	worldGen(movingEntities, staticEntities)
 {
 	this->window = window;
 	this->player = j1;
-	this->listaEntidades = new ListaEntidades();
 	this->soldier = new Soldado();
 
-	proxRender = sf::Vector2f(0, 0);
-	worldGen.resetToOrigin();
-	//worldGen.generate(&proxRender, player);
-
-	this->platform = new Plataforma(sf::Vector2f(0,0));
 	initVariables();
 	initPosition();
 }
@@ -35,6 +36,7 @@ Fase::Fase(Player* j1, sf::RenderWindow* window):worldGen(listaEntidades)
 Fase::~Fase()
 {
 }
+
 
 void Fase::updateCollision()
 {
@@ -60,48 +62,10 @@ void Fase::updateCollision()
 
 }
 
+
 void Fase::checkCollision()
 {
-	//Colliding Player and Platform
-	sf::Vector2f centerDist;
-	sf::Vector2f collision;
-
-
-	centerDist.x = player->getPosition().x - platform->getPosition().x;
-	centerDist.y = player->getPosition().y - platform->getPosition().y;
-
-	collision.x = abs(centerDist.x) - (this->player->getSize().x / 2.0f + this->platform->getSize().x / 2.0f);
-	collision.y = abs(centerDist.y) - (this->player->getSize().y / 2.0f + this->platform->getSize().y / 2.0f);
-
-
-	if (collision.x < 0.0f && collision.y < 0.0f)
-	{
-		if (collision.x > collision.y)
-		{
-			if (centerDist.x > 0.0f)
-			{
-				this->player->setPosition(this->player->getPosition().x - collision.x, this->player->getPosition().y);
-			}
-			else
-			{
-				this->player->setPosition(this->player->getPosition().x + collision.x, this->player->getPosition().y);
-			}
-			this->player->resetVelocityX();
-		}
-		else
-		{
-			if (centerDist.y > 0.0f)
-			{
-				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y - collision.y);
-			}
-			else
-			{
-				this->player->setPosition(this->player->getPosition().x, this->player->getPosition().y + collision.y);
-			}
-			this->player->resetVelocityY();
-			this->player->canJump = true;
-		}
-	}
+	this->collider->collide();
 
 }
 
@@ -110,7 +74,10 @@ void Fase::updateCharacs()
 	this->soldier->updateMovement(this->player->updateMovement(sf::Vector2f(0, 0)));
 	this->soldier->update();
 	this->player->update();
+
+	worldGen.generate(&posRender, player);
 }
+
 
 void Fase::resetAnimationTimer()
 {

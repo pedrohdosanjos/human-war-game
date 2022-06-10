@@ -43,7 +43,7 @@ void GerenciadorGrafico::display() {
     // Clear the window to re-display stuff. 
 void GerenciadorGrafico::clear() {
     if (isWindowOpen())
-        window->clear();
+        window->clear(sf::Color::Cyan);
 }
 
     // Returns if the window is open. 
@@ -97,6 +97,11 @@ sf::Texture* GerenciadorGrafico::loadTexture(const char* arquivo)
     }
 
     return tex;
+}
+
+float GerenciadorGrafico::updateDeltaTime()
+{
+    return 0.0f;
 }
 
 sf::RenderWindow* GerenciadorGrafico::getWindow() const

@@ -1,8 +1,10 @@
 #include "GeradorDeMundo.h"
 #include "Plataforma.h"
 
-GeradorDeMundo::GeradorDeMundo(ListaEntidades* listaEntidades, const unsigned int distancia):
-	listaEntidades(listaEntidades), distancia(distancia)
+GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia):
+	staticEntidades(staticEntidades),
+	movingEntidades(movingEntidades),
+	distancia(distancia)
 {
 	srand(time(NULL));
 
@@ -22,45 +24,47 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
 {
 	*viewPosition = ultimaPos;
 
-	ultimaPos.y = -(2.0f + rand() % 2) * 20 / 3 + limiteInf.y;
-
 	Entidade* tmp;
 
 	for (unsigned int i = 0; i < distancia; i++)
 	{
-		ultimaPos.x += 100;
+		ultimaPos.y = limiteInf.y -(rand() % 2)*60;
+		//ultimaPos.y = limiteInf.y;
+
+		ultimaPos.x += 300;
 
 		tmp = new Plataforma(ultimaPos);
-		listaEntidades->LEs.push(static_cast<Entidade*>(tmp));
+		staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
 	}
 
-	clean();
+	//clean();
 }
 
 void GeradorDeMundo::clean()
 {
 	Entidade* pAux = nullptr;
-	for (int i = 0; i < listaEntidades->LEs.getSize(); i++)
+	for (int i = 0; i < staticEntidades->LEs.getSize(); i++)
 	{
-		pAux = listaEntidades->LEs.getItem(i);
+		pAux = staticEntidades->LEs.getItem(i);
 		if (pAux)
 		{
 			if (pAux->getPosition().x < (ultimaPos.x - 3 * distancia * 100))
 			{
-				listaEntidades->LEs.pop(pAux);
+				staticEntidades->LEs.pop(pAux);
+
 				i--;
 				if (i < 0)
 					i = -1;
-			}
-			else
-				break;
+			}	
 		}
+		else
+			break;
 	}
 }
 
 void GeradorDeMundo::setDistancia()
 {
-	distancia = 20;
+	distancia = 1;
 }
 
 

@@ -9,13 +9,13 @@
 //Private function
 void Jogo::initVariables()
 {
-	this->LEs = fase1->getListaEntidades();
+	this->LMEs = fase1->getListaMovingEntidades();
+	this->LSEs = fase1->getListaStaticEntidades();
 }
 
 void Jogo::initPlayer()
 {
 	this->player = new Player();
-	this->player->setPosition(0, 0);
 }
 
 void Jogo::initFase()
@@ -92,6 +92,8 @@ void Jogo::update()
 
 void Jogo::render()
 {
+	//Update Delta Time
+	this->graphicManager->updateDeltaTime();
 	//Collision
 	this->fase1->checkCollision();
 
@@ -105,10 +107,18 @@ void Jogo::render()
 	//this->window->setView(this->view);
 
 	//Draw game objects
-	for (int i = 0; i < this->LEs->LEs.getSize(); i++)
+	for (int i = 0; i < this->LMEs->LEs.getSize(); i++) //Moving Entities
 	{
-		Entidade* pAux = LEs->LEs.getItem(i);
+		Entidade* pAux = LMEs->LEs.getItem(i);
 		pAux->draw(*graphicManager->getWindow());
+
+	}
+
+	for (int i = 0; i < this->LSEs->LEs.getSize(); i++) //Static Entities
+	{
+		Entidade* pAux = LSEs->LEs.getItem(i);
+		pAux->draw(*graphicManager->getWindow());
+
 	}
 	graphicManager->display();
 }
