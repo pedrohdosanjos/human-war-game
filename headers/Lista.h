@@ -72,7 +72,7 @@ public:
 			pAux->setpProx(pAux->getpProx());
 		}
 		delete pAux;
-		size--;
+		size -=1;
 	}
 };
 
