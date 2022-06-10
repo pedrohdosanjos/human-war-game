@@ -59,7 +59,7 @@ public:
 		//First position
 		if (pAux == pPrimeiro)
 		{
-			pPrimeiro = pAux->getpProx;
+			pPrimeiro = pAux->getpProx();
 		}
 		//Last position
 		else if (pAux == pUltimo)

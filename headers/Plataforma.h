@@ -5,7 +5,7 @@ class Plataforma :public Obstaculo
 {
 public:
 	//Constructor/Destructor
-	Plataforma();
+	Plataforma(sf::Vector2f pos);
 	~Plataforma();
 
 	//Public Functions

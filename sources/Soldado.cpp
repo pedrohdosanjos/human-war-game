@@ -1,6 +1,7 @@
 #include "Soldado.h"
 
-Soldado::Soldado() :Inimigo()
+Soldado::Soldado() :
+	Inimigo(id = soldier)
 {
 	this->initTexture();
 }

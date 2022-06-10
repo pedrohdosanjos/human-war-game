@@ -1,7 +1,7 @@
 #pragma once
-#include "Entidade.h"
+#include "StaticEntidade.h"
 
-class Obstaculo : public Entidade
+class Obstaculo : public StaticEntidade
 {
 protected:
 	//Protected Functions
@@ -10,7 +10,7 @@ protected:
 
 public:
 	//Constructor/Destructor
-	Obstaculo();
+	Obstaculo(ID id = empty);
 	~Obstaculo();
 
 

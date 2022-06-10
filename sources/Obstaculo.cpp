@@ -1,6 +1,7 @@
 #include "Obstaculo.h"
 
-Obstaculo::Obstaculo():Entidade()
+Obstaculo::Obstaculo(ID id) :
+	StaticEntidade(id)
 {
 }
 

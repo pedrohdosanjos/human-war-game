@@ -1,12 +1,12 @@
 #pragma once
-#include "Entidade.h"
+#include "MovingEntidade.h"
 
 
 #define JUMPING_HEIGHT 200.f
 
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
 
-class Personagem : public Entidade
+class Personagem : public MovingEntidade
 {
 protected:
 	sf::Clock animationTimer;
@@ -16,7 +16,7 @@ protected:
 	short animState;
 
 	//Physics
-	sf::Vector2f velocity;
+	//sf::Vector2f velocity;
 	float velocityMax;
 	float velocityMin;
 	float acceleration;
@@ -35,7 +35,7 @@ protected:
 public:
 
 	//Constructor / Destructor
-	Personagem();
+	Personagem(ID id = empty);
 	~Personagem();
 
 
@@ -57,5 +57,6 @@ public:
 	void updateAnimations();
 	void updatePhysics();
 
+	//Update
 	void update();
 };

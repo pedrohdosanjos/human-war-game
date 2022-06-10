@@ -1,9 +1,12 @@
 #include "Plataforma.h"
 
-Plataforma::Plataforma()
+Plataforma::Plataforma(sf::Vector2f pos) :
+	Obstaculo(id = platform)
 {
 	this->initSprite();
 	this->initTexture();
+
+	this->setPosition(pos.x, pos.y);
 }
 
 Plataforma::~Plataforma()

@@ -1,5 +1,8 @@
 #pragma once
 #include "Jogo.h"
+
+enum ID { empty = 0, player, soldier, platform, militar, fire };
+
 class Entidade
 {
 protected:
@@ -9,11 +12,15 @@ protected:
 	sf::Texture textureSheet;
 	sf::IntRect currentFrame;
 
+	//ID 
+	ID id;
+
 public:
+	//Gerenciador Grafico
 	GerenciadorGrafico* graphicManager;
 
 	//Constructor/Destructor
-	Entidade();
+	Entidade(ID id = empty);
 	~Entidade();
 
 	//Public Functions
@@ -28,5 +35,12 @@ public:
 	//Animation Functions
 	void draw(sf::RenderTarget& target) { target.draw(this->sprite); }
 
-};
+	//Public Functions
+	ID getID() const;
+	virtual void collide(Entidade* otherEntity, sf::Vector2f collision) = 0;
 
+
+
+
+
+};
