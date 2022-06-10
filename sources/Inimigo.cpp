@@ -16,7 +16,7 @@ void Inimigo::initSprite()
 
 void Inimigo::initPhysics()
 {
-	this->velocityMax = 8.f;
+	this->velocityMax = 15.f;
 	this->velocityMin = 1.f;
 	this->acceleration = 3.f;
 	this->drag = 0.8f;
@@ -58,6 +58,7 @@ void Inimigo::collide(Entidade* otherEntity, sf::Vector2f intersect)
 {
 	if (otherEntity->getID() == platform)
 	{
+		this->moveOnCollision(intersect, otherEntity);
 	}
 	else if (otherEntity->getID() == fire)
 	{

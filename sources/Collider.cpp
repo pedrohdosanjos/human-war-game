@@ -30,11 +30,11 @@ void Collider::collide()
 			entity1 = (this->statEntities->LEs.getItem(j));
 			entity2 = (this->movEntities->LEs.getItem(i));
 
-			centerDist.x = entity2->getPosition().x - entity1->getPosition().x;
-			centerDist.y = entity2->getPosition().y - entity1->getPosition().y;
+			centerDist.x = (entity2->getPosition().x + entity2->getSize().x / 2) - (entity1->getPosition().x + entity1->getSize().x / 2);
+			centerDist.y = (entity2->getPosition().y + entity2->getSize().y / 2) - (entity1->getPosition().y + entity1->getSize().y / 2);
 
-			collision.x = abs(centerDist.x) - (entity1->getSize().y / 2.0f + entity2->getSize().y / 2.0f);
-			collision.y = abs(centerDist.y) - (entity1->getSize().y / 2.0f + entity2->getSize().y / 2.0f);
+			collision.x = abs(centerDist.x) - (entity1->getSize().x / 2.f + entity2->getSize().x / 2.f);
+			collision.y = abs(centerDist.y) - (entity1->getSize().y / 2.f + entity2->getSize().y / 2.f);
 
 
 			if (collision.x < 0.0f && collision.y < 0.0f)
@@ -45,7 +45,6 @@ void Collider::collide()
 		}
 	}
 
-
 	//Colliding two moving objects
 	for (int i = 0; i < movEntities->LEs.getSize(); i++)
 	{
@@ -54,10 +53,10 @@ void Collider::collide()
 			entity1 = (this->movEntities->LEs.getItem(i));
 			entity2 = (this->movEntities->LEs.getItem(j));
 
-			centerDist.x = entity2->getPosition().x - entity1->getPosition().x;
-			centerDist.y = entity2->getPosition().y - entity1->getPosition().y;
+			centerDist.x = (entity2->getPosition().x + entity2->getSize().x / 2) - (entity1->getPosition().x + entity1->getSize().x / 2);
+			centerDist.y = (entity2->getPosition().y + entity2->getSize().y / 2) - (entity1->getPosition().y + entity1->getSize().y / 2);
 
-			collision.x = abs(centerDist.x) - (entity1->getSize().y / 2.0f + entity2->getSize().y / 2.0f);
+			collision.x = abs(centerDist.x) - (entity1->getSize().x / 2.0f + entity2->getSize().x / 2.0f);
 			collision.y = abs(centerDist.y) - (entity1->getSize().y / 2.0f + entity2->getSize().y / 2.0f);
 
 

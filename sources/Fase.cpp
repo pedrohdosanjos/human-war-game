@@ -9,14 +9,14 @@ void Fase::initVariables()
 	movingEntities->LEs.push(this->player);
 	movingEntities->LEs.push(this->soldier);
 
-	worldGen.generate(&posRender, player);
+	//worldGen.generate(&posRender, player);
 
 	collider = new Collider(movingEntities, staticEntities);
 }
 
 void Fase::initPosition()
 {
-	this->soldier->setPosition(1580, 720);
+	this->soldier->setPosition(1580, 0);
 	this->player->setPosition(300, 0);
 }
 
@@ -75,7 +75,8 @@ void Fase::updateCharacs()
 	this->soldier->update();
 	this->player->update();
 
-	worldGen.generate(&posRender, player);
+	if(this->player->getPosition().x > posRender.x)
+		worldGen.generate(&posRender, player);
 }
 
 

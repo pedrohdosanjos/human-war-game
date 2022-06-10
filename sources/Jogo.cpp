@@ -71,7 +71,7 @@ void Jogo::pollEvents()
 			}
 		}
 	}
-	this->fase1->updateCollision();
+	//this->fase1->updateCollision();
 }
 
 

@@ -1,5 +1,7 @@
 #include "Player.h"
 
+class Personagem;
+
 void Player::initTexture()
 {
 	if (!this->textureSheet.loadFromFile("player.png"))

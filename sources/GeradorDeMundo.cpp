@@ -1,5 +1,6 @@
 #include "GeradorDeMundo.h"
 #include "Plataforma.h"
+#include <Windows.h>
 
 GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia):
 	staticEntidades(staticEntidades),
@@ -28,16 +29,16 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
 
 	for (unsigned int i = 0; i < distancia; i++)
 	{
-		ultimaPos.y = limiteInf.y -(rand() % 2)*60;
+		ultimaPos.y = limiteInf.y -(rand() % 2)* 75.f;
 		//ultimaPos.y = limiteInf.y;
 
-		ultimaPos.x += 300;
+		ultimaPos.x += 300.f;
 
 		tmp = new Plataforma(ultimaPos);
 		staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
 	}
 
-	//clean();
+	clean();
 }
 
 void GeradorDeMundo::clean()
@@ -48,27 +49,30 @@ void GeradorDeMundo::clean()
 		pAux = staticEntidades->LEs.getItem(i);
 		if (pAux)
 		{
-			if (pAux->getPosition().x < (ultimaPos.x - 3 * distancia * 100))
+			if (pAux->getPosition().x < ultimaPos.x - 3 * distancia * 300)
 			{
 				staticEntidades->LEs.pop(pAux);
 
 				i--;
 				if (i < 0)
 					i = -1;
-			}	
+			}
+			else 
+			{
+				printf("%d \n", staticEntidades->LEs.getSize());
+				break;
+			}
 		}
-		else
-			break;
 	}
 }
 
 void GeradorDeMundo::setDistancia()
 {
-	distancia = 1;
+	distancia = 10;
 }
 
 
 void GeradorDeMundo::resetToOrigin()
 {
-	ultimaPos = sf::Vector2f(0, 0);
+	ultimaPos = sf::Vector2f(0.0f, 0.0f);
 }
