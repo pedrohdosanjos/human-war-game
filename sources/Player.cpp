@@ -71,6 +71,7 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 {
 	if (otherEntity->getID() == soldier || otherEntity->getID() == militar)
 	{
+		this->moveOnCollision(collision, otherEntity);
 
 		//Funcao para receber dano
 	}
@@ -79,7 +80,7 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 	{
 		if (collision.x < 0.0f && collision.y < 0.0f) {
 
-			moveOnCollision(collision, otherEntity);
+			this->moveOnCollision(collision, otherEntity);
 
 			if (otherEntity->getID() == platform)
 			{

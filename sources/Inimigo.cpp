@@ -58,7 +58,6 @@ void Inimigo::collide(Entidade* otherEntity, sf::Vector2f intersect)
 {
 	if (otherEntity->getID() == platform)
 	{
-		moveOnCollision(intersect, otherEntity);
 	}
 	else if (otherEntity->getID() == fire)
 	{
@@ -66,6 +65,7 @@ void Inimigo::collide(Entidade* otherEntity, sf::Vector2f intersect)
 	}
 	else if (otherEntity->getID() == player)
 	{
+		this->moveOnCollision(intersect, otherEntity);
 		//Function to give damage to player
 	}
 }

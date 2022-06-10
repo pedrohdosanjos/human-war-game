@@ -63,8 +63,8 @@ void Collider::collide()
 
 			if (collision.x < 0.0f && collision.y < 0.0f)
 			{
-				entity1->collide(entity1, collision);
 				entity2->collide(entity1, collision);
+				entity1->collide(entity2, collision);
 			}
 
 		}
