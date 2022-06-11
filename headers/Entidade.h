@@ -26,6 +26,9 @@ public:
 	//Public Functions
 	virtual void initTexture() = 0;
 	virtual void initSprite() = 0;
+	virtual sf::Vector2f updateMovement(sf::Vector2f pos);
+	virtual void update();
+	virtual void resetAnimationTimer();
 
 	//Sprite Functions
 	void setPosition(const float x, const float y);

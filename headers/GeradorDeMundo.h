@@ -19,7 +19,7 @@ public:
 
 	~GeradorDeMundo();
 
-	void generate(sf::Vector2f* viewPosition, Player* player);
+	void generate(sf::Vector2f* viewPosition, Player* player, int fase);
 
 	void clean();
 

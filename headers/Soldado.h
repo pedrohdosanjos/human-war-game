@@ -6,10 +6,11 @@ class Soldado : public Inimigo
 protected:
 	//Protected Functions
 	void initTexture();
+	void initSprite();
 
 public:
 	//Constructor/Destructor
-	Soldado();
+	Soldado(int pos);
 	~Soldado();
 
 };

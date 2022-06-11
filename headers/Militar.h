@@ -6,10 +6,10 @@ class Militar : public Inimigo
 protected:
 	//Protected Functions
 	void initTexture();
-
+	void initSprite();
 
 public:
 	//Constructor/Destructor
-	Militar();
+	Militar(int pos);
 	~Militar();
 };
