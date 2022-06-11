@@ -1,49 +1,73 @@
 ﻿#include "ListaEntidades.h"
-#include "Fase.h"
+#include "FaseMedia.h"
+#include "FaseContemp.h"
 #include "Jogo.h"
 #include "Player.h"
 #include "Soldado.h"
 #include "Plataforma.h"
-
+#include "Menu.h"
 
 //Private function
 void Jogo::initVariables()
 {
-	this->LMEs = fase1->getListaMovingEntidades();
-	this->LSEs = fase1->getListaStaticEntidades();
+	this->LMEs = fase->getListaMovingEntidades();
+
+	this->LSEs = fase->getListaStaticEntidades();
+
 }
+
 
 void Jogo::initPlayer()
 {
 	this->player = new Player();
 }
 
+
 void Jogo::initFase()
 {
-	this->fase1 = new Fase(this->player, graphicManager->getWindow());
+	numFase = menu->selectedFase;
+
+	if (numFase == 1)
+		fase = new FaseMedia(this->player);
+
+	else if (numFase == 2)
+		fase = new FaseContemp(this->player);
+
+	else
+		std::cout << "burro";
 }
+
 
 //Constructor / Destructor
 Jogo::Jogo() :
 	graphicManager(GerenciadorGrafico::getInstance())
 {
+	this->menu = new Menu();
+
+	while (this->menu->selectedFase == 0)
+	{
+		this->menu->run_menu();
+	}
+
 	this->initPlayer();
 	this->initFase();
 	this->initVariables();
 }
 
+
 Jogo::~Jogo()
 {
 	delete this->player;
-	delete this->fase1;
-
+	delete this->fase;
 }
+
 
 //Accessors
 const bool Jogo::running() const
 {
 	return graphicManager->isWindowOpen();
 }
+
 
 //Functions
 void Jogo::pollEvents()
@@ -67,7 +91,7 @@ void Jogo::pollEvents()
 				this->ev.key.code == sf::Keyboard::S
 				)
 			{
-				this->fase1->resetAnimationTimer();
+				this->fase->resetAnimationTimer();
 			}
 		}
 	}
@@ -87,24 +111,22 @@ void Jogo::setView()
 void Jogo::update()
 {
 	this->pollEvents();
-	this->fase1->updateCharacs();
+	this->fase->updateCharacs();
 }
 
 void Jogo::render()
 {
 	//Update Delta Time
 	this->graphicManager->updateDeltaTime();
+
 	//Collision
-	this->fase1->checkCollision();
+	this->fase->checkCollision();
 
 	//View settings
 	this->setView();
 
 	//Clear
 	graphicManager->clear();
-
-	//View
-	//this->window->setView(this->view);
 
 	//Draw game objects
 	for (int i = 0; i < this->LMEs->LEs.getSize(); i++) //Moving Entities

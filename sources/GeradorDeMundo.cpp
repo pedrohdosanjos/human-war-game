@@ -1,5 +1,7 @@
 #include "GeradorDeMundo.h"
 #include "Plataforma.h"
+#include "Militar.h"
+#include "Soldado.h"
 #include <Windows.h>
 
 GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia):
@@ -21,7 +23,7 @@ GeradorDeMundo::~GeradorDeMundo()
 {
 }
 
-void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
+void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player, int fase)
 {
 	*viewPosition = ultimaPos;
 
@@ -36,6 +38,22 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
 
 		tmp = new Plataforma(ultimaPos);
 		staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
+
+		if (rand() % 2)
+		{
+			if (fase == 1)
+			{
+				tmp = new Soldado(ultimaPos.x);
+				staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
+			}
+
+			if (fase == 2)
+			{
+				tmp = new Militar(ultimaPos.x);
+				movingEntidades->LEs.push(static_cast<Entidade*>(tmp));
+			}
+				
+		}
 	}
 
 	clean();
@@ -59,7 +77,26 @@ void GeradorDeMundo::clean()
 			}
 			else 
 			{
-				printf("%d \n", staticEntidades->LEs.getSize());
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < movingEntidades->LEs.getSize(); i++)
+	{
+		pAux = movingEntidades->LEs.getItem(i);
+		if (pAux)
+		{
+			if (pAux->getPosition().x < ultimaPos.x - 3 * distancia * 300)
+			{
+				movingEntidades->LEs.pop(pAux);
+
+				i--;
+				if (i < 0)
+					i = -1;
+			}
+			else
+			{
 				break;
 			}
 		}
