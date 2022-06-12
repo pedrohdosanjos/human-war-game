@@ -1,23 +1,25 @@
 ﻿#include "Personagem.h"
 
-void Personagem::initVariables()
-{
-	this->animState = IDLE;
-
-}
-
-
 void Personagem::initAnimations()
 {
+	
 	this->animationTimer.restart();
 	this->animationSwitch = true; //default
+	
 }
 
 
-Personagem::Personagem(ID id) :
-	MovingEntidade(id)
+Personagem::Personagem(int life, const float attCooldown, const float attackingTime, ID id) :
+	MovingEntidade(id),
+	attCooldown(attCooldown), 
+	attackingTime(attackingTime)
 {
-	this->initVariables();
+	this->life = life;
+	this->cooldownTimer = 0;
+	this->attackTimer = 0;
+	this->flagIsAttacking = false;
+	this->flagHasAttacked = false;
+	this->animState = IDLE;
 	this->initAnimations();
 }
 
@@ -178,7 +180,7 @@ void Personagem::updatePhysics()
 	//Limit gravity
 	if (std::abs(this->velocity.y) > this->velocityMaxY)
 	{
-		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a dire��o do movimento
+		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a direcao do movimento
 	}
 
 
@@ -197,8 +199,78 @@ void Personagem::updatePhysics()
 	this->sprite.move(this->velocity);
 }
 
-void Personagem::update()
+void Personagem::update(const float dt)
 {
 	this->updateAnimations();
 	this->updatePhysics();
+}
+
+const int Personagem::getLife() const
+{
+	return this->life;
+}
+
+void Personagem::receiveDamage(const int damage)
+{
+	this->life -= damage;
+
+	if (life <= 0)
+		this->alive = false;
+}
+
+void Personagem::attack()
+{
+	if (canAttack())
+	{
+		this->flagIsAttacking = true;
+		this->flagHasAttacked = false;
+	}
+
+}
+
+void Personagem::incrementAttackingTimer(const float dt)
+{
+	if (this->flagIsAttacking)
+	{
+		this->cooldownTimer = 0;
+		this->attackTimer += dt;
+
+		if (this->attackTimer > this->attackingTime)
+		{
+			this->flagIsAttacking = false;
+		}
+	}
+	else
+	{
+		this->cooldownTimer += dt;
+		this->attackTimer = 0;
+	}
+}
+
+const bool Personagem::canAttack() const
+{
+	if (this->cooldownTimer > this->attCooldown)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
+}
+
+const bool Personagem::isAttacking() const
+{
+	return this->flagIsAttacking;
+}
+
+int Personagem::getDamage()
+{
+	if (isAttacking() && !flagHasAttacked)
+	{
+		this->flagHasAttacked = true;
+		return this->getDamage();
+	}
+	return 0;
 }

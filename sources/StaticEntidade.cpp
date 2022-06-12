@@ -1,6 +1,6 @@
 #include "StaticEntidade.h"
 
-StaticEntidade::StaticEntidade(ID id) :
+StaticEntidade::StaticEntidade(ID id):
 	Entidade(id)
 {
 }

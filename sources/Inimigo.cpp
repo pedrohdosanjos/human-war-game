@@ -1,4 +1,5 @@
 #include "Inimigo.h"
+#include "Player.h"
 
 void Inimigo::initPhysics()
 {
@@ -10,15 +11,20 @@ void Inimigo::initPhysics()
 	this->velocityMaxY = 80.f;
 }
 
-Inimigo::Inimigo(ID id) :
-	Personagem(id)
+
+Inimigo::Inimigo(Player* pP,int life, const float attCooldown, const float attackingTime, ID id) :
+	Personagem(life, attCooldown, attackingTime,id),
+	pPlayer(pP)
 {
 	this->initPhysics();
+
 }
 
 Inimigo::~Inimigo()
 {
+	pPlayer = nullptr;
 }
+
 
 sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 {
@@ -39,19 +45,63 @@ sf::Vector2f Inimigo::updateMovement(sf::Vector2f pos)
 	return pos;
 }
 
+
 void Inimigo::collide(Entidade* otherEntity, sf::Vector2f intersect)
 {
 	if (otherEntity->getID() == platform)
 	{
 		this->moveOnCollision(intersect, otherEntity);
 	}
+
 	else if (otherEntity->getID() == fire)
 	{
-		//Function to give damage to player
+		this->moveOnCollision(intersect, otherEntity);
 	}
+
 	else if (otherEntity->getID() == player)
 	{
+		
+		if (pPlayer != nullptr)
+		{
+			sf::Vector2f centerDist;
+
+			centerDist.x = (otherEntity->getPosition().x + otherEntity->getSize().x / 2.0f) - (this->getPosition().x + otherEntity->getSize().x / 2.0f);
+			intersect.x = abs(centerDist.x) - ((this->getSize().x - this->pPlayer->getSwordDistance() * 2.0f) / 2.0f + otherEntity->getSize().x / 2.0f);
+
+			if (intersect.x < 0.0f && intersect.y < 0.0f)
+			{
+				if (this->isAttacking())
+				{
+					this->pPlayer->receiveDamage(this->getDamage());
+				}
+			}
+		}
 		this->moveOnCollision(intersect, otherEntity);
-		//Function to give damage to player
+	}
+}
+
+void Inimigo::setpPlayer(Player* pP)
+{
+	if (pP == nullptr)
+	{
+		std::cout << "Erro:Ponteiro para Player inacessivel" << std::endl;
+		return;
+	}
+	this->pPlayer = pP;
+
+}
+
+sf::Vector2f Inimigo::getPlayerPosition()
+{
+	return this->pPlayer->getPosition();
+}
+
+void Inimigo::receiveDamage(const int damage)
+{
+	this->life -= damage;
+
+	if (life <= 0)
+	{
+		this->alive = false;
 	}
 }

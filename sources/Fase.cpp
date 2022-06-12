@@ -4,11 +4,13 @@
 #include "Plataforma.h"
 #include "ListaEntidades.h"
 
-Fase::Fase():
+Fase::Fase() :
 	movingEntities(new ListaEntidades()),
 	staticEntities(new ListaEntidades()),
-	worldGen(movingEntities, staticEntities)
+	worldGen(movingEntities, staticEntities),
+	player(player)
 {
+
 }
 
 Fase::~Fase()

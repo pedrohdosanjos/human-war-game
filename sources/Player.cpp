@@ -1,6 +1,11 @@
 #include "Player.h"
+#define PLAYER_LIFE 100.0f
+#define PLAYER_DAMAGE 10
+#define PLAYER_ATTACK_COOLDOWN 0.2f
+#define PLAYER_DAMAGE_COOLDOWN 1
+#define PLAYER_ATTACK_TIME 1.2f
+#define PLAYER_ATTACK_DISTANCE 15.0f
 
-class Personagem;
 
 void Player::initTexture()
 {
@@ -31,8 +36,12 @@ void Player::initPhysics()
 }
 
 
-Player::Player() :Personagem(id = player)
+Player::Player() :
+	Personagem(PLAYER_LIFE, PLAYER_ATTACK_COOLDOWN, PLAYER_ATTACK_TIME, id = player),
+	swordDistance(PLAYER_ATTACK_DISTANCE)
 {
+	this->setDamage(PLAYER_DAMAGE);
+	this->damageCooldown = 0.0f;
 	this->initTexture();
 	this->initSprite();
 	this->initPhysics();
@@ -65,6 +74,12 @@ sf::Vector2f Player::updateMovement(sf::Vector2f pos)
 		this->move(0.f, 2.f);
 		this->animState = JUMPING;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && this->canAttack()) //Attack
+	{
+		this->attack();
+		this->animState = ATTACKING;
+		this->flagIsAttacking = true;
+	}
 
 	return this->getPosition();
 }
@@ -73,9 +88,18 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 {
 	if (otherEntity->getID() == soldier || otherEntity->getID() == militar)
 	{
+		Personagem* pAux = dynamic_cast<Personagem*>(otherEntity);
+
+		if (pAux != nullptr)
+		{
+			if (this->isAttacking())
+			{
+				pAux->receiveDamage(this->getDamage());
+			}
+		}
+
 		this->moveOnCollision(collision, otherEntity);
 
-		//Funcao para receber dano
 	}
 	else
 
@@ -96,4 +120,31 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 			//Se tiver mais obstaculos colocar aqui
 		}
 	}
+
+	if (this->life <= 0)
+	{
+		this->alive = false;
+	}
+}
+
+void Player::update(const float dt)
+{
+	this->incrementAttackingTimer(dt);
+	this->damageCooldown += dt;
+}
+
+const float Player::getSwordDistance()
+{
+	return this->swordDistance;
+}
+
+void Player::receiveDamage(const int damage)
+{
+	this->life -= damage;
+
+	if (this->life <= 0)
+	{
+		this->alive = false;
+	}
+	this->damageCooldown = 0;
 }

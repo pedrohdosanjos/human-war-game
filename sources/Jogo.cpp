@@ -1,11 +1,13 @@
 ﻿#include "ListaEntidades.h"
-#include "FaseMedia.h"
+#include "Fase.h"
+#include "Menu.h"
 #include "FaseContemp.h"
+#include "FaseMedia.h"
 #include "Jogo.h"
 #include "Player.h"
 #include "Soldado.h"
 #include "Plataforma.h"
-#include "Menu.h"
+
 
 //Private function
 void Jogo::initVariables()
@@ -16,12 +18,10 @@ void Jogo::initVariables()
 
 }
 
-
 void Jogo::initPlayer()
 {
 	this->player = new Player();
 }
-
 
 void Jogo::initFase()
 {
@@ -34,9 +34,8 @@ void Jogo::initFase()
 		fase = new FaseContemp(this->player);
 
 	else
-		std::cout << "burro";
+		std::cout << "Numero Invalido";
 }
-
 
 //Constructor / Destructor
 Jogo::Jogo() :
@@ -48,26 +47,24 @@ Jogo::Jogo() :
 	{
 		this->menu->run_menu();
 	}
-
+	
 	this->initPlayer();
 	this->initFase();
 	this->initVariables();
 }
 
-
 Jogo::~Jogo()
 {
 	delete this->player;
 	delete this->fase;
-}
 
+}
 
 //Accessors
 const bool Jogo::running() const
 {
 	return graphicManager->isWindowOpen();
 }
-
 
 //Functions
 void Jogo::pollEvents()
@@ -95,7 +92,7 @@ void Jogo::pollEvents()
 			}
 		}
 	}
-	//this->fase1->updateCollision();
+	this->fase->checkCollision();
 }
 
 
@@ -111,22 +108,20 @@ void Jogo::setView()
 void Jogo::update()
 {
 	this->pollEvents();
-	this->fase->updateCharacs();
+	this->fase->updateCharacs(dt);
 }
 
 void Jogo::render()
 {
-	//Update Delta Time
-	this->graphicManager->updateDeltaTime();
-
-	//Collision
-	this->fase->checkCollision();
 
 	//View settings
 	this->setView();
 
 	//Clear
 	graphicManager->clear();
+
+	//Update Delta Time
+	this->dt = clock.restart().asSeconds();
 
 	//Draw game objects
 	for (int i = 0; i < this->LMEs->LEs.getSize(); i++) //Moving Entities

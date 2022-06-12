@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-Menu::Menu():
+Menu::Menu() :
 	graphicManager(GerenciadorGrafico::getInstance())
 {
 	winclose = new sf::RectangleShape();
@@ -58,7 +58,7 @@ void Menu::loop_events()
 
 	while (graphicManager->getWindow()->pollEvent(ev))
 	{
-		if (ev.type == sf::Event::Closed) 
+		if (ev.type == sf::Event::Closed)
 		{
 			graphicManager->closeWindow();
 		}
@@ -66,9 +66,9 @@ void Menu::loop_events()
 		pos_mouse = sf::Mouse::getPosition(*graphicManager->getWindow());
 		mouse_coord = graphicManager->getWindow()->mapPixelToCoords(pos_mouse);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed) 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed)
 		{
-			if (pos < 4) 
+			if (pos < 4)
 			{
 				++pos;
 				pressed = true;
@@ -93,19 +93,19 @@ void Menu::loop_events()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !theselect) {
 			theselect = true;
 
-			if (pos == 4) 
+			if (pos == 4)
 			{
 				graphicManager->closeWindow();
 				exit(1);
 			}
 			std::cout << options[pos] << '\n';
 
-			if (pos == 1) 
+			if (pos == 1)
 			{
 				selectedFase = 1;
 			}
 
-			if (pos == 2) 
+			if (pos == 2)
 			{
 				selectedFase = 2;
 			}
@@ -125,7 +125,7 @@ void Menu::draw_all()
 	graphicManager->clear();
 	graphicManager->render(bg);
 
-	for (auto t : texts) 
+	for (auto t : texts)
 	{
 		graphicManager->getWindow()->draw(t);
 	}
@@ -140,7 +140,7 @@ int Menu::getFase()
 
 void Menu::run_menu()
 {
-	while (graphicManager->isWindowOpen() && selectedFase == 0) 
+	while (graphicManager->isWindowOpen() && selectedFase == 0)
 	{
 		loop_events();
 		draw_all();

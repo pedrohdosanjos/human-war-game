@@ -4,7 +4,7 @@
 #include "Soldado.h"
 #include <Windows.h>
 
-GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia):
+GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia) :
 	staticEntidades(staticEntidades),
 	movingEntidades(movingEntidades),
 	distancia(distancia)
@@ -31,7 +31,7 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player, int fa
 
 	for (unsigned int i = 0; i < distancia; i++)
 	{
-		ultimaPos.y = limiteInf.y -(rand() % 2)* 75.f;
+		ultimaPos.y = limiteInf.y - (rand() % 2) * 75.f;
 		//ultimaPos.y = limiteInf.y;
 
 		ultimaPos.x += 300.f;
@@ -43,16 +43,16 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player, int fa
 		{
 			if (fase == 1)
 			{
-				tmp = new Soldado(ultimaPos.x);
+				tmp = new Soldado(ultimaPos.x, player);
 				staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
 			}
 
 			if (fase == 2)
 			{
-				tmp = new Militar(ultimaPos.x);
+				tmp = new Militar(ultimaPos.x, player);
 				movingEntidades->LEs.push(static_cast<Entidade*>(tmp));
 			}
-				
+
 		}
 	}
 
@@ -75,7 +75,7 @@ void GeradorDeMundo::clean()
 				if (i < 0)
 					i = -1;
 			}
-			else 
+			else
 			{
 				break;
 			}

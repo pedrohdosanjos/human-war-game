@@ -1,10 +1,16 @@
 #include "Militar.h"
+#define MILITAR_LIFE 20
+#define MILITAR_DAMAGE 10
+#define MILITAR_ATTACK_COOLDOWN 0.2f
+#define MILITAR_DAMAGE_COOLDOWN 1
+#define MILITAR_ATTACK_TIME 1.2f
+#define MILITAR_ATTACK_DISTANCE 50.0f
 
-Militar::Militar(int pos) :
-	Inimigo(id = militar)
+Militar::Militar(int pos, Player* pP) :
+	Inimigo(pP, MILITAR_LIFE, MILITAR_ATTACK_COOLDOWN, MILITAR_ATTACK_TIME, id = militar)
 {
+	this->setDamage(MILITAR_DAMAGE);
 	this->initTexture();
-	this->initSprite();
 	this->setPosition(pos, 300);
 }
 
@@ -29,4 +35,14 @@ void Militar::initSprite()
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(3.f, 3.f);
 	this->sprite.setColor(sf::Color(0, 255, 0));
+}
+
+void Militar::update(const float dt)
+{
+	this->incrementAttackingTimer(dt);
+
+	if ((this->getPlayerPosition().x - this->getPosition().x) < MILITAR_ATTACK_DISTANCE && this->canAttack())
+	{
+		this->attack();
+	}
 }

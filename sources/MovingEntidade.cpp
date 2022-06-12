@@ -1,8 +1,10 @@
 #include "MovingEntidade.h"
 
 MovingEntidade::MovingEntidade(ID id) :
-	Entidade(id)
+	Entidade(id),
+	alive(true)
 {
+	this->damage = 0;
 }
 
 MovingEntidade::~MovingEntidade()
@@ -38,4 +40,14 @@ void MovingEntidade::moveOnCollision(sf::Vector2f collision, Entidade* other)
 		}
 		this->velocity.y = 0.0f;
 	}
+}
+
+void MovingEntidade::setDamage(int damage)
+{
+	this->damage = damage;
+}
+
+const int MovingEntidade::getDamage() const
+{
+	return this->damage;
 }

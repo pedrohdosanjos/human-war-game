@@ -12,7 +12,7 @@ void FaseContemp::initPosition()
 	this->player->setPosition(450, 0);
 }
 
-FaseContemp::FaseContemp(Player* j1):Fase()
+FaseContemp::FaseContemp(Player* j1) :Fase()
 {
 	this->player = j1;
 
@@ -47,11 +47,11 @@ void FaseContemp::updateCollision()
 }
 
 
-void FaseContemp::updateCharacs()
+void FaseContemp::updateCharacs(const float dt)
 {
 	this->army->updateMovement(this->player->updateMovement(sf::Vector2f(0, 0)));
-	this->army->update();
-	this->player->update();
+	this->army->update(dt);
+	this->player->update(dt);
 
 	if (this->player->getPosition().x > posRender.x)
 		worldGen.generate(&posRender, player, 2);
