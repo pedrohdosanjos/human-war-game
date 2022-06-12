@@ -10,7 +10,10 @@ protected:
 
 public:
 	//Constructor/Destructor
-	Soldado(int pos);
+	Soldado(int pos, Player* pP = nullptr);
 	~Soldado();
+
+	//Update
+	void update(const float dt);
 
 };

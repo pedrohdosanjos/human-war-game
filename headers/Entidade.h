@@ -42,8 +42,4 @@ public:
 	ID getID() const;
 	virtual void collide(Entidade* otherEntity, sf::Vector2f collision) = 0;
 
-
-
-
-
 };

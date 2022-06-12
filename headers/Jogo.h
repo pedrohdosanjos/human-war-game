@@ -22,19 +22,22 @@ class Plataforma;
 class Jogo
 {
 private:
-
 	//Manager
 	GerenciadorGrafico* graphicManager;
 
 	//Variables
 	Player* player;
 	ListaEntidades* LMEs;
-	ListaEntidades* LSEs;	
+	ListaEntidades* LSEs;
 	Fase* fase;
 	int numFase;
 
 	//Window
 	sf::Event ev;
+
+	//Delta Time
+	sf::Clock clock;
+	float dt;
 
 	//Private functions
 	void initVariables();

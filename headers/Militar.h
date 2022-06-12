@@ -8,8 +8,12 @@ protected:
 	void initTexture();
 	void initSprite();
 
+
 public:
 	//Constructor/Destructor
-	Militar(int pos);
+	Militar(int pos, Player* pP = nullptr);
 	~Militar();
+
+	//Update
+	void update(const float dt);
 };

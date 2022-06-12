@@ -2,21 +2,29 @@
 #include "MovingEntidade.h"
 
 
-#define JUMPING_HEIGHT 200.f
+#define JUMPING_HEIGHT 200.0f
 
-enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
+enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, ATTACKING };
 
 class Personagem : public MovingEntidade
 {
 protected:
-	sf::Clock animationTimer;
+	//Variables
+	int life;
+	bool flagIsAttacking;
+	bool flagHasAttacked;
+	const float attCooldown;
+	const float attackingTime;
+	float attackTimer;
+	float cooldownTimer;
+
 
 	//Animation
+	sf::Clock animationTimer;
 	bool animationSwitch;
 	short animState;
 
 	//Physics
-	//sf::Vector2f velocity;
 	float velocityMax;
 	float velocityMin;
 	float acceleration;
@@ -28,14 +36,13 @@ protected:
 	virtual void initPhysics() = 0;
 	virtual void initTexture() = 0;
 	virtual void initSprite() = 0;
-	void initVariables();
 	void initAnimations();
 
 
 public:
 
 	//Constructor / Destructor
-	Personagem(ID id = empty);
+	Personagem(int life, const float attCooldown, const float attackingTime, ID id = empty);
 	~Personagem();
 
 
@@ -58,5 +65,21 @@ public:
 	void updatePhysics();
 
 	//Update
-	void update();
+	virtual void update(const float dt);
+
+	//Game Mechanics
+	const int getLife() const;
+
+	/*
+	* Virtual function, because each type of character receive damage
+	* and attack in different ways.
+	*/
+	virtual void receiveDamage(const int damage);
+	virtual void attack();
+
+	void incrementAttackingTimer(const float dt);
+	const bool canAttack() const;
+	const bool isAttacking() const;
+	int getDamage();
+
 };

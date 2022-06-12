@@ -2,8 +2,9 @@
 #include "Lista.h"
 #include "Entidade.h"
 
-class ListaEntidades {
+class ListaEntidades{
 
 public:
 	Lista<Entidade> LEs;
 };
+

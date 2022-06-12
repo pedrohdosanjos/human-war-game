@@ -1,10 +1,13 @@
 #pragma once
 #include "Personagem.h"
 
-#define JUMPING_HEIGHT 200.f
 
 class Player : public Personagem
 {
+private:
+	const float swordDistance;
+	float damageCooldown;
+
 protected:
 
 	//Protected Functions
@@ -23,5 +26,12 @@ public:
 
 	//Collision
 	void collide(Entidade* otherEntity, sf::Vector2f collision);
+
+	//Update
+	void update(const float dt);
+
+	//Game Mechanics
+	const float getSwordDistance();
+	void receiveDamage(const int damage);
 
 };

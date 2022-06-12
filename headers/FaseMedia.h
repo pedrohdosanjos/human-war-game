@@ -3,7 +3,7 @@
 #include "Fogo.h"
 #include "Fase.h"
 
-class FaseMedia: public Fase
+class FaseMedia : public Fase
 {
 private:
 	//Class Variables
@@ -22,6 +22,6 @@ public:
 	void updateCollision();
 
 	//Other Functions
-	void updateCharacs();
+	void updateCharacs(const float dt);
 	void resetAnimationTimer();
 };

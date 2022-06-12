@@ -1,10 +1,11 @@
 #pragma once
 #include"Entidade.h"
 
-class MovingEntidade :public Entidade
+class MovingEntidade:public Entidade
 {
-private:
-
+protected:
+	bool alive;
+	int damage;
 
 public:
 	//Constructor/Destructor
@@ -15,7 +16,6 @@ public:
 	//Virtual Functions
 	virtual void initTexture() = 0;
 	virtual void initSprite() = 0;
-	virtual void update() = 0;
 	virtual void resetAnimationTimer() = 0;
 
 	//Public Functions
@@ -26,5 +26,14 @@ public:
 	//Velocity Variable
 	sf::Vector2f velocity;
 
+	//Update
+	virtual void update(const float dt) = 0;
+
+	//Damage
+	
+	void setDamage(int damage);
+	const int getDamage() const;
+
 
 };
+

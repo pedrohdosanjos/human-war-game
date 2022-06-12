@@ -3,7 +3,7 @@
 #include "Arame.h"
 #include "Fase.h"
 
-class FaseContemp: public Fase
+class FaseContemp : public Fase
 {
 private:
 	//Class Variables
@@ -22,6 +22,6 @@ public:
 	void updateCollision();
 
 	//Other Functions
-	void updateCharacs();
+	void updateCharacs(const float dt);
 	void resetAnimationTimer();
 };

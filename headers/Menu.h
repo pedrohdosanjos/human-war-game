@@ -23,7 +23,7 @@ class Menu {
     std::vector<std::size_t> sizes;
 
 protected:
- 
+
 public:
     Menu();
     ~Menu();

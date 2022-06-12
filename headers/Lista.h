@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Elemento.h"
 
 template <class TL> class Lista {
@@ -72,7 +72,7 @@ public:
 			pAux->setpProx(pAux->getpProx());
 		}
 		delete pAux;
-		size -=1;
+		size--;
 	}
 };
 
