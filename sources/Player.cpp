@@ -1,6 +1,6 @@
 #include "Player.h"
 
-class Personagem;
+class Personagem::Personagem;
 
 void Player::initTexture()
 {
@@ -77,6 +77,7 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 
 		//Funcao para receber dano
 	}
+
 	else
 
 	{
@@ -88,9 +89,11 @@ void Player::collide(Entidade* otherEntity, sf::Vector2f collision)
 			{
 				this->canJump = true;
 			}
+
 			else if (otherEntity->getID() == fire)
 			{
-				//Funcao para receber dano
+				graphicManager->closeWindow();
+				std::cout << "Voce morreu" << std::endl;
 			}
 
 			//Se tiver mais obstaculos colocar aqui

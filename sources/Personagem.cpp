@@ -1,38 +1,38 @@
 ﻿#include "Personagem.h"
 
-void Personagem::initVariables()
+void Personagem::Personagem::initVariables()
 {
 	this->animState = IDLE;
 
 }
 
 
-void Personagem::initAnimations()
+void Personagem::Personagem::initAnimations()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true; //default
 }
 
 
-Personagem::Personagem(ID id) :
+Personagem::Personagem::Personagem(ID id) :
 	MovingEntidade(id)
 {
 	this->initVariables();
 	this->initAnimations();
 }
 
-Personagem::~Personagem()
+Personagem::Personagem::~Personagem()
 {
 }
 
 
-const sf::FloatRect Personagem::getGlobalBounds() const
+const sf::FloatRect Personagem::Personagem::getGlobalBounds() const
 {
 	return this->sprite.getGlobalBounds();
 }
 
 
-const bool& Personagem::getAnimSwitch()
+const bool& Personagem::Personagem::getAnimSwitch()
 {
 	bool anim_switch = this->animationSwitch;
 
@@ -43,12 +43,12 @@ const bool& Personagem::getAnimSwitch()
 }
 
 
-void Personagem::resetVelocityY()
+void Personagem::Personagem::resetVelocityY()
 {
 	this->velocity.y = 0.f;
 }
 
-void Personagem::resetVelocityX()
+void Personagem::Personagem::resetVelocityX()
 {
 	this->velocity.x = 0.f;
 
@@ -56,7 +56,7 @@ void Personagem::resetVelocityX()
 
 
 
-void Personagem::move(const float x, const float y)
+void Personagem::Personagem::move(const float x, const float y)
 {
 	if (x != 0)
 	{
@@ -79,7 +79,7 @@ void Personagem::move(const float x, const float y)
 }
 
 
-void Personagem::updateAnimations()
+void Personagem::Personagem::updateAnimations()
 {
 	if (this->animState == IDLE)
 	{
@@ -163,13 +163,13 @@ void Personagem::updateAnimations()
 }
 
 
-void Personagem::resetAnimationTimer()
+void Personagem::Personagem::resetAnimationTimer()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true;
 }
 
-void Personagem::updatePhysics()
+void Personagem::Personagem::updatePhysics()
 {
 
 	//Gravity
@@ -197,7 +197,7 @@ void Personagem::updatePhysics()
 	this->sprite.move(this->velocity);
 }
 
-void Personagem::update()
+void Personagem::Personagem::update()
 {
 	this->updateAnimations();
 	this->updatePhysics();

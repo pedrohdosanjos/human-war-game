@@ -34,7 +34,7 @@ void FaseMedia::updateCharacs()
 	this->player->update();
 
 	if (this->player->getPosition().x > posRender.x)
-		worldGen.generate(&posRender, player, 2);
+		worldGen.generate(&posRender, player, 1);
 }
 
 void FaseMedia::resetAnimationTimer()

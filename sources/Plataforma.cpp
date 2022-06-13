@@ -3,8 +3,9 @@
 Plataforma::Plataforma(sf::Vector2f pos) :
 	Obstaculo(id = platform)
 {
-	this->initSprite();
 	this->initTexture();
+
+	this->initSprite();
 
 	this->setPosition(pos.x, pos.y);
 }

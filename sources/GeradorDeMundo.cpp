@@ -1,5 +1,7 @@
 #include "GeradorDeMundo.h"
 #include "Plataforma.h"
+#include "Fogo.h"
+#include "Arame.h"
 #include "Militar.h"
 #include "Soldado.h"
 #include <Windows.h>
@@ -38,6 +40,35 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player, int fa
 
 		tmp = new Plataforma(ultimaPos);
 		staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
+
+		if (rand() % 2)
+		{
+			if (rand() % 2)
+			{
+				if (rand() % 2)
+				{
+					if (fase == 1)
+					{
+						ultimaPos.y -= 68;
+						ultimaPos.x += 150.f;
+						tmp = new Fogo(ultimaPos);
+						staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
+						ultimaPos.x -= 150.f;
+					}
+
+					if (fase == 2)
+					{
+						ultimaPos.y -= 60;
+						ultimaPos.x += 150.f;
+						tmp = new Arame(ultimaPos);
+						staticEntidades->LEs.push(static_cast<Entidade*>(tmp));
+						ultimaPos.x -= 150.f;
+					}
+
+				}
+			}
+		}
+
 	}
 
 	clean();
