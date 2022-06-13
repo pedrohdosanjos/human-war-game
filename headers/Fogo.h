@@ -3,9 +3,11 @@
 
 class Fogo : public Obstaculo
 {
-
+private:
+	void initTexture();
+	void initSprite();
 public:
 	//Constructor/Destructor
-	Fogo();
+	Fogo(sf::Vector2f pos);
 	~Fogo();
 };

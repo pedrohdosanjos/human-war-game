@@ -3,9 +3,9 @@
 
 #define JUMPING_HEIGHT 200.f
 
-class Player : public Personagem
+class Player : public Personagem::Personagem
 {
-protected:
+private:
 
 	//Protected Functions
 	void initTexture();

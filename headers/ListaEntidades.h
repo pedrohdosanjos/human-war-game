@@ -5,5 +5,5 @@
 class ListaEntidades {
 
 public:
-	Lista<Entidade> LEs;
+	Lista:: Lista<Entidade> LEs;
 };

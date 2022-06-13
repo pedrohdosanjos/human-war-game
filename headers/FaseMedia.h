@@ -8,6 +8,7 @@ class FaseMedia : public Fase
 private:
 	//Class Variables
 	Soldado* soldier;
+	Fogo* fogo;
 
 	//Private Functions
 	void initVariables();

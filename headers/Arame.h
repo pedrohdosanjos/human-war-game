@@ -3,9 +3,12 @@
 
 class Arame :public Obstaculo
 {
+private:
+	void initTexture();
+	void initSprite();
 
 public:
 	//Constructor/Destructor
-	Arame();
+	Arame(sf::Vector2f pos);
 	~Arame();
 };
