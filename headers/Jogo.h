@@ -10,7 +10,10 @@
 #include <iostream>
 #include<ctime>
 
+class Menu;
 class Fase;
+class FaseMedia;
+class FaseContemp;
 class ListaEntidades;
 class Player;
 class Soldado;
@@ -19,6 +22,7 @@ class Plataforma;
 class Jogo
 {
 private:
+
 	//Manager
 	GerenciadorGrafico* graphicManager;
 
@@ -26,13 +30,11 @@ private:
 	Player* player;
 	ListaEntidades* LMEs;
 	ListaEntidades* LSEs;
-	Fase* fase1;
+	Fase* fase;
+	int numFase;
 
 	//Window
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
 	sf::Event ev;
-
 
 	//Private functions
 	void initVariables();
@@ -43,6 +45,9 @@ public:
 	//Constructor / Destructor
 	Jogo();
 	virtual ~Jogo();
+
+	//Menu
+	Menu* menu;
 
 	//Accessors
 	const bool running() const;
