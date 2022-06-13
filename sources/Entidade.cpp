@@ -43,4 +43,3 @@ ID Entidade::getID() const
 {
 	return this->id;
 }
-

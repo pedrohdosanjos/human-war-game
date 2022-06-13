@@ -100,7 +100,7 @@ void GeradorDeMundo::clean()
 
 void GeradorDeMundo::setDistancia()
 {
-	distancia = 10;
+	distancia = 5;
 }
 
 

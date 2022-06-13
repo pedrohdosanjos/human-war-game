@@ -56,7 +56,15 @@ void FaseContemp::updateCharacs()
 	this->player->update();
 
 	if (this->player->getPosition().x > posRender.x)
+	{
 		worldGen.generate(&posRender, player, 2);
+		nrenders++;
+	}
+	if (nrenders > 10)
+	{
+		this->player->graphicManager->closeWindow();
+		std::cout << "Voce venceu" << std::endl;
+	}
 }
 
 void FaseContemp::resetAnimationTimer()
