@@ -1,8 +1,10 @@
 #include "GeradorDeMundo.h"
 #include "Plataforma.h"
+#include "Militar.h"
+#include "Soldado.h"
 #include <Windows.h>
 
-GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia):
+GeradorDeMundo::GeradorDeMundo(ListaEntidades* movingEntidades, ListaEntidades* staticEntidades, const unsigned int distancia) :
 	staticEntidades(staticEntidades),
 	movingEntidades(movingEntidades),
 	distancia(distancia)
@@ -21,7 +23,7 @@ GeradorDeMundo::~GeradorDeMundo()
 {
 }
 
-void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
+void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player, int fase)
 {
 	*viewPosition = ultimaPos;
 
@@ -29,7 +31,7 @@ void GeradorDeMundo::generate(sf::Vector2f* viewPosition, Player* player)
 
 	for (unsigned int i = 0; i < distancia; i++)
 	{
-		ultimaPos.y = limiteInf.y -(rand() % 2)* 75.f;
+		ultimaPos.y = limiteInf.y - (rand() % 2) * 75.f;
 		//ultimaPos.y = limiteInf.y;
 
 		ultimaPos.x += 300.f;
@@ -57,9 +59,8 @@ void GeradorDeMundo::clean()
 				if (i < 0)
 					i = -1;
 			}
-			else 
+			else
 			{
-				printf("%d \n", staticEntidades->LEs.getSize());
 				break;
 			}
 		}

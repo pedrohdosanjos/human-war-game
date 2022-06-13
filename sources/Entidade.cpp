@@ -11,6 +11,19 @@ Entidade::~Entidade()
 {
 }
 
+sf::Vector2f Entidade::updateMovement(sf::Vector2f pos)
+{
+	return sf::Vector2f();
+}
+
+void Entidade::update()
+{
+}
+
+void Entidade::resetAnimationTimer()
+{
+}
+
 void Entidade::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
@@ -30,5 +43,4 @@ ID Entidade::getID() const
 {
 	return this->id;
 }
-
 
