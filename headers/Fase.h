@@ -34,4 +34,6 @@ public:
 
 	virtual void updateCharacs() = 0;
 	virtual void resetAnimationTimer() = 0;
+
+	int nrenders = 0;
 };
