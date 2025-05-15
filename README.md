@@ -1,57 +1,57 @@
 # Human War Game
 
-**Projeto acadêmico desenvolvido em C++ para a disciplina de Técnicas de Programação - UTFPR (1º semestre de 2022).**
+**Academic project developed in C++ for the Programming Techniques course - UTFPR (1st semester of 2022).**
 
-Este projeto consiste em um jogo de plataformas, simulando o confronto entre unidades humanas com movimentação, ataque e lógica básica de combate.
-
----
-
-## Contexto
-
-Este foi um dos primeiros projetos desenvolvidos durante minha graduação em Engenharia da Computação na UTFPR. Ele foi adicionado ao GitHub via upload direto, anterior ao uso adequado de versionamento com Git. Mantenho este projeto público como parte do meu processo de aprendizado e evolução como desenvolvedor.
+This project consists of a platform game simulating a battle between human units with movement, attack, and basic combat logic.
 
 ---
 
-## Funcionalidades
+## Context
 
-- Movimentação de tropas
-- Ataques entre personagens
-- Variações de dano
-- Interface gráfica
+This was one of the first projects I developed during my Computer Engineering degree at UTFPR. It was uploaded to GitHub directly, before I started using Git properly. I keep this project public as part of my learning process and growth as a developer.
 
 ---
 
-## Tecnologias
+## Features
 
-- **Linguagem:** C++
-- **Bibliotecas:** SFML
-- **Compilador recomendado:** g++ ou MinGW
-- **Ambiente sugerido:** Linux terminal, Windows com Dev-C++ ou VS Code
+- Troop movement
+- Character attacks
+- Damage variations
+- Graphical interface
 
 ---
 
-## Como executar
+## Technologies
 
-1. Clone o repositório:
+- **Language:** C++
+- **Libraries:** SFML
+- **Recommended compiler:** g++ or MinGW
+- **Suggested environment:** Linux terminal, Windows with Dev-C++ or VS Code
+
+---
+
+## How to run
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/pedrohdosanjos/human-war-game.git
    cd human-war-game
    ```
 
-2. Compile o programa:
+2. Compile the program:
    ```bash
    g++ -o human-war main.cpp
    ```
 
-3. Execute:
+3. Run:
    ```bash
    ./human-war
    ```
 
 ---
 
-## Observações
+## Notes
 
-- Código escrito no início da graduação — pode conter práticas não ideais.
-- Nenhum sistema de versionamento foi utilizado durante o desenvolvimento original.
-- O projeto é mantido como parte do meu histórico de aprendizado.
+- Code written at the beginning of my degree — may contain non-ideal practices.
+- No version control system was used during the original development.
+- This project is kept public as part of my learning history.
