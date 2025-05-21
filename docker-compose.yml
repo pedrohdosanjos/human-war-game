@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  human-war:
+    build: .
+    container_name: human-war
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+      - /dev/dri:/dev/dri
+    network_mode: host
+    stdin_open: true
+    tty: true
+    working_dir: /app
+
+    entrypoint: >
+      bash -c "xhost +local:docker && g++ -std=c++17 -Iheaders sources/*.cpp -lsfml-graphics -lsfml-window -lsfml-system -o /app/human-war && /app/human-war"
