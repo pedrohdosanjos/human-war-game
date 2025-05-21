@@ -1,21 +1,18 @@
 ﻿#include "Personagem.h"
+#include <cmath>
 
 void Personagem::Personagem::initVariables()
 {
 	this->animState = IDLE;
-
 }
-
 
 void Personagem::Personagem::initAnimations()
 {
 	this->animationTimer.restart();
-	this->animationSwitch = true; //default
+	this->animationSwitch = true; // default
 }
 
-
-Personagem::Personagem::Personagem(ID id) :
-	MovingEntidade(id)
+Personagem::Personagem::Personagem(ID id) : MovingEntidade(id)
 {
 	this->initVariables();
 	this->initAnimations();
@@ -25,23 +22,20 @@ Personagem::Personagem::~Personagem()
 {
 }
 
-
 const sf::FloatRect Personagem::Personagem::getGlobalBounds() const
 {
 	return this->sprite.getGlobalBounds();
 }
 
-
-const bool& Personagem::Personagem::getAnimSwitch()
+const bool &Personagem::Personagem::getAnimSwitch()
 {
 	bool anim_switch = this->animationSwitch;
 
 	if (this->animationSwitch)
 		this->animationSwitch = false;
 
-	return anim_switch;
+	return this->animationSwitch;
 }
-
 
 void Personagem::Personagem::resetVelocityY()
 {
@@ -51,33 +45,27 @@ void Personagem::Personagem::resetVelocityY()
 void Personagem::Personagem::resetVelocityX()
 {
 	this->velocity.x = 0.f;
-
 }
-
-
 
 void Personagem::Personagem::move(const float x, const float y)
 {
 	if (x != 0)
 	{
-		//Acceleration
+		// Acceleration
 		this->velocity.x += x * this->acceleration;
 
-
-
-		//Limit velocity
+		// Limit velocity
 		if (std::abs(this->velocity.x) > this->velocityMax)
 		{
-			this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); //Checando a dire��o do movimento
+			this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f); // Checando a dire��o do movimento
 		}
 	}
 	else
 	{
-		//Jumping 
+		// Jumping
 		this->velocity.y = -sqrt(y * 980.f * JUMPING_HEIGHT);
 	}
 }
-
 
 void Personagem::Personagem::updateAnimations()
 {
@@ -88,9 +76,9 @@ void Personagem::Personagem::updateAnimations()
 			this->currentFrame.top = 0.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 160.f) //valor usado para o png em quest�o
+			if (this->currentFrame.left >= 160.f) // valor usado para o png em quest�o
 			{
-				this->currentFrame.left = 0; //Reiniciando a anima��o
+				this->currentFrame.left = 0; // Reiniciando a anima��o
 			}
 
 			this->animationTimer.restart();
@@ -104,9 +92,9 @@ void Personagem::Personagem::updateAnimations()
 			this->currentFrame.top = 50.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 360.f) //valor usado para o png em quest�o
+			if (this->currentFrame.left >= 360.f) // valor usado para o png em quest�o
 			{
-				this->currentFrame.left = 0; //Reiniciando a anima��o
+				this->currentFrame.left = 0; // Reiniciando a anima��o
 			}
 
 			this->animationTimer.restart();
@@ -123,9 +111,9 @@ void Personagem::Personagem::updateAnimations()
 			this->currentFrame.top = 50.f;
 			this->currentFrame.left += 40.f;
 
-			if (this->currentFrame.left >= 360.f) //valor usado para o png em quest�o
+			if (this->currentFrame.left >= 360.f) // valor usado para o png em quest�o
 			{
-				this->currentFrame.left = 0; //Reiniciando a anima��o
+				this->currentFrame.left = 0; // Reiniciando a anima��o
 			}
 
 			this->animationTimer.restart();
@@ -142,26 +130,21 @@ void Personagem::Personagem::updateAnimations()
 			this->currentFrame.top = 100.f;
 			this->currentFrame.left += 80.f;
 
-			if (this->currentFrame.left >= 80.f) //valor usado para o png em quest�o
+			if (this->currentFrame.left >= 80.f) // valor usado para o png em quest�o
 			{
-				this->currentFrame.left = 0; //Reiniciando a anima��o
+				this->currentFrame.left = 0; // Reiniciando a anima��o
 			}
 
 			this->animationTimer.restart();
 			this->sprite.setTextureRect(this->currentFrame);
 		}
-
 	}
 
 	else
 	{
 		this->animationTimer.restart();
 	}
-
-
-
 }
-
 
 void Personagem::Personagem::resetAnimationTimer()
 {
@@ -172,20 +155,19 @@ void Personagem::Personagem::resetAnimationTimer()
 void Personagem::Personagem::updatePhysics()
 {
 
-	//Gravity
+	// Gravity
 	this->velocity.y += 1.0 * this->gravity;
 
-	//Limit gravity
+	// Limit gravity
 	if (std::abs(this->velocity.y) > this->velocityMaxY)
 	{
-		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); //Checando a dire��o do movimento
+		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f); // Checando a dire��o do movimento
 	}
 
-
-	//Deceleration
+	// Deceleration
 	this->velocity *= this->drag;
 
-	//Limit deceleration
+	// Limit deceleration
 	if (std::abs(this->velocity.x) < this->velocityMin)
 	{
 		this->velocity.x = 0.f;

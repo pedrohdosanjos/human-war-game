@@ -2,9 +2,10 @@
 
 void Arame::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("ArameFarpado.png"))
+	if (!this->textureSheet.loadFromFile("textures/ArameFarpado.png"))
 	{
-		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
+		std::cout << "Erro ao carregar imagem" << "\n"
+				  << std::endl;
 	}
 }
 
@@ -17,7 +18,7 @@ void Arame::initSprite()
 	this->sprite.setScale(2.f, 2.f);
 }
 
-Arame::Arame(sf::Vector2f pos):Obstaculo(id = fire)
+Arame::Arame(sf::Vector2f pos) : Obstaculo(id = fire)
 {
 	this->initTexture();
 

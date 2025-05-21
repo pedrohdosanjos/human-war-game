@@ -2,9 +2,10 @@
 
 void Fogo::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("FogoObstaculo.png"))
+	if (!this->textureSheet.loadFromFile("textures/FogoObstaculo.png"))
 	{
-		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
+		std::cout << "Erro ao carregar imagem" << "\n"
+				  << std::endl;
 	}
 }
 
@@ -17,14 +18,13 @@ void Fogo::initSprite()
 	this->sprite.setScale(2.f, 2.f);
 }
 
-Fogo::Fogo(sf::Vector2f pos):Obstaculo(id = fire)
+Fogo::Fogo(sf::Vector2f pos) : Obstaculo(id = fire)
 {
 	this->initTexture();
 
 	this->initSprite();
 
 	this->setPosition(pos.x, pos.y);
-
 }
 
 Fogo::~Fogo()

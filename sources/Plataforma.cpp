@@ -1,7 +1,6 @@
 #include "Plataforma.h"
 
-Plataforma::Plataforma(sf::Vector2f pos) :
-	Obstaculo(id = platform)
+Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo(id = platform)
 {
 	this->initTexture();
 
@@ -12,7 +11,6 @@ Plataforma::Plataforma(sf::Vector2f pos) :
 
 Plataforma::~Plataforma()
 {
-
 }
 
 void Plataforma::initSprite()
@@ -21,13 +19,14 @@ void Plataforma::initSprite()
 
 	this->currentFrame = sf::IntRect(0, 0, 300, 75);
 	this->sprite.setTextureRect(this->currentFrame);
-	//this->sprite.setTextureRect(sf::IntRect(0, 0, 100, 22));
+	// this->sprite.setTextureRect(sf::IntRect(0, 0, 100, 22));
 }
 
 void Plataforma::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("plataforma.png"))
+	if (!this->textureSheet.loadFromFile("textures/plataforma.png"))
 	{
-		std::cout << "Erro ao carregar imagem" << "\n" << std::endl;
+		std::cout << "Erro ao carregar imagem" << "\n"
+				  << std::endl;
 	}
 }
