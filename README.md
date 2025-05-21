@@ -5,6 +5,8 @@
 This project consists of a platform game simulating a battle between human units with movement, attack, and basic combat logic.
 
 ---
+![Human War Preview](gif.gif)
+---
 
 ## Context
 
