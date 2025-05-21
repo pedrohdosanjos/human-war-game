@@ -36,16 +36,12 @@ This was one of the first projects I developed during my Computer Engineering de
    ```bash
    git clone https://github.com/pedrohdosanjos/human-war-game.git
    cd human-war-game
+   cd sources
    ```
 
-2. Compile the program:
+2. Run:
    ```bash
-   g++ -o human-war main.cpp
-   ```
-
-3. Run:
-   ```bash
-   ./human-war
+   docker compose up
    ```
 
 ---
@@ -55,3 +51,5 @@ This was one of the first projects I developed during my Computer Engineering de
 - Code written at the beginning of my degree — may contain non-ideal practices.
 - No version control system was used during the original development.
 - This project is kept public as part of my learning history.
+
+
