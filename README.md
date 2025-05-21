@@ -5,12 +5,13 @@
 This project consists of a platform game simulating a battle between human units with movement, attack, and basic combat logic.
 
 ---
-![Human War Preview](gif.gif)
----
 
 ## Context
 
 This was one of the first projects I developed during my Computer Engineering degree at UTFPR. It was uploaded to GitHub directly, before I started using Git properly. I keep this project public as part of my learning process and growth as a developer.
+
+---
+![Human War Preview](gif.gif)
 
 ---
 
