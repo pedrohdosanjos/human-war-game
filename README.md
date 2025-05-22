@@ -39,7 +39,6 @@ This was one of the first projects I developed during my Computer Engineering de
    ```bash
    git clone https://github.com/pedrohdosanjos/human-war-game.git
    cd human-war-game
-   cd sources
    ```
 
 2. Run:
